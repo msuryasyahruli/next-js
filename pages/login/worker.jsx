@@ -1,12 +1,43 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import image from "./imgAuth/true-agency-o4UhdLv5jbQ-unsplash.jpg";
 import gradient from "./imgAuth/gradient.png";
 import logo from "./imgAuth/logo.png";
 import Link from "next/link";
 import style from "./login.module.css";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const worker = () => {
+  let [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  let change = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
+  
+  let router = useRouter()
+
+  let submit = (e) => {
+    axios
+      .post(`http://localhost:4000/worker`, data)
+      .then((res) => {
+        alert("Login success");
+        localStorage.setItem("id",res.data.id);
+        router.push("/landingPage");
+      })
+      .catch((err) => {
+        alert("Account doesn't exist")
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <main style={{ margin: 0, backgroundColor: "#f6f7f8" }}>
@@ -86,6 +117,9 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
+                    name="email"
+                    id="email"
+                    onChange={change}
                     placeholder="Masukan alamat email"
                     style={{
                       width: "100%",
@@ -108,6 +142,9 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
+                    name="password"
+                    id="password"
+                    onChange={change}
                     placeholder="Masukan kata sandi"
                     style={{
                       width: "100%",
@@ -132,6 +169,7 @@ const worker = () => {
                   Lupa kata sandi?
                 </a>
                 <button
+                  onClick={submit}
                   style={{
                     width: "100%",
                     height: 50,

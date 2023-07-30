@@ -26,7 +26,7 @@ const Profile = () => {
           >
             <div className="container pt-5 pb-5">
               <div className="row">
-                <div className="col-lg-4">
+                <section className="col-lg-4">
                   <div
                     style={{
                       borderRadius: 8,
@@ -282,8 +282,8 @@ const Profile = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-lg-8 pt-3 pt-lg-0">
+                </section>
+                <section className="col-lg-8 pt-3 pt-lg-0">
                   <div
                     style={{
                       borderRadius: 8,
@@ -465,7 +465,7 @@ const Profile = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </section>
               </div>
             </div>
           </section>

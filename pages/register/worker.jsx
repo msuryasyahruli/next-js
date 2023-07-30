@@ -1,12 +1,43 @@
 import Image from "next/image";
-import React from "react";
-import image from "./imgAuth/true-agency-o4UhdLv5jbQ-unsplash.jpg"
-import gradient from "./imgAuth/gradient.png"
-import logo from "./imgAuth/logo.png"
+import React, { useState } from "react";
+import image from "./imgAuth/true-agency-o4UhdLv5jbQ-unsplash.jpg";
+import gradient from "./imgAuth/gradient.png";
+import logo from "./imgAuth/logo.png";
 import Link from "next/link";
 import style from "./login.module.css";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const worker = () => {
+  let [data, setData] = useState({
+    email: "",
+    name: "",
+    password: "",
+    phone: "",
+  });
+
+  let change = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
+
+  let router = useRouter();
+
+  let submit = (e) => {
+    axios
+      .post(`http://localhost:4000/worker`, data)
+      .then((res) => {
+        alert("Register success");
+        router.push("/login/worker");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <main style={{ margin: 0, backgroundColor: "#f6f7f8" }}>
@@ -36,7 +67,8 @@ const worker = () => {
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
-              <div className="d-flex align-items-center"
+              <div
+                className="d-flex align-items-center"
                 style={{
                   height: "100%",
                   position: "absolute",
@@ -86,7 +118,10 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
+                    name="name"
+                    id="name"
                     placeholder="Masukan nama panjang"
+                    onChange={change}
                     style={{
                       width: "100%",
                       height: 50,
@@ -107,8 +142,11 @@ const worker = () => {
                     Email
                   </p>
                   <input
-                    type="text"
+                    type="email"
+                    name="email"
+                    id="email"
                     placeholder="Masukan alamat email"
+                    onChange={change}
                     style={{
                       width: "100%",
                       height: 50,
@@ -130,7 +168,10 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
+                    name="phone"
+                    id="phone"
                     placeholder="Masukan no handphone"
+                    onChange={change}
                     style={{
                       width: "100%",
                       height: 50,
@@ -152,7 +193,10 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
+                    name="password"
+                    id="password"
                     placeholder="Masukan kata sandi"
+                    onChange={change}
                     style={{
                       width: "100%",
                       height: 50,
@@ -185,6 +229,7 @@ const worker = () => {
                   />
                 </div>
                 <button
+                  onClick={submit}
                   style={{
                     marginTop: 50,
                     width: "100%",
