@@ -26,10 +26,10 @@ const worker = () => {
 
   let submit = (e) => {
     axios
-      .post(`http://localhost:4000/worker`, data)
+      .post(`http://localhost:2525/worker/login`, data)
       .then((res) => {
+        localStorage.setItem("token",res.data.data.token);
         alert("Login success");
-        localStorage.setItem("id",res.data.id);
         router.push("/landingPage");
       })
       .catch((err) => {
@@ -116,10 +116,11 @@ const worker = () => {
                     Email
                   </p>
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     id="email"
                     onChange={change}
+                    required
                     placeholder="Masukan alamat email"
                     style={{
                       width: "100%",
@@ -145,6 +146,7 @@ const worker = () => {
                     name="password"
                     id="password"
                     onChange={change}
+                    required
                     placeholder="Masukan kata sandi"
                     style={{
                       width: "100%",

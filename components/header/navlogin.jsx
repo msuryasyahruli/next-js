@@ -7,7 +7,7 @@ const Navlogin = () => {
   return (
     <div>
       <header>
-        <nav
+        {/* <nav
           className="container"
           style={{
             display: "flex",
@@ -48,7 +48,61 @@ const Navlogin = () => {
               Masuk Untuk Perekrut
             </button>
           </div>
-        </nav>
+        </nav> */}
+        <div className="container">
+          <nav className="navbar navbar-expand-md navbar-light row" style={{padding: '25px 15px'}}>
+            <div>
+              <Image src={logo} />
+            </div>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div
+              className="collapse navbar-collapse m-0 row justify-content-md-end justify-content-between"
+              id="navbarNav"
+            >
+              <div className="mr-2 mr-md-1 pt-3 pt-md-0">
+                <Link href="/login/worker">
+                  <button
+                    style={{
+                      width: "180px",
+                      height: 44,
+                      borderRadius: 5,
+                      border: "1px solid #5e50a1",
+                      backgroundColor: "transparent",
+                    }}
+                  >
+                    Masuk Untuk Pekerja
+                  </button>
+                </Link>
+              </div>
+              <div className="ml-2 ml-md-1 pt-3 pt-md-0">
+                <Link href="/login/recruiter">
+                  <button
+                    style={{
+                      width: "180px",
+                      height: 44,
+                      borderRadius: 5,
+                      border: 0,
+                      backgroundColor: "#5e50a1",
+                      color: "white",
+                    }}
+                  >
+                    Masuk Untuk Perekrut
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </nav>
+        </div>
       </header>
     </div>
   );

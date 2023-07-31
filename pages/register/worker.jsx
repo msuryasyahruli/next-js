@@ -10,10 +10,10 @@ import { useRouter } from "next/router";
 
 const worker = () => {
   let [data, setData] = useState({
-    email: "",
     name: "",
-    password: "",
+    email: "",
     phone: "",
+    password: "",
   });
 
   let change = (e) => {
@@ -28,7 +28,7 @@ const worker = () => {
 
   let submit = (e) => {
     axios
-      .post(`http://localhost:4000/worker`, data)
+      .post(`http://localhost:2525/worker/register`, data)
       .then((res) => {
         alert("Register success");
         router.push("/login/worker");
@@ -206,7 +206,7 @@ const worker = () => {
                     }}
                   />
                 </div>
-                <div>
+                {/* <div>
                   <p
                     style={{
                       color: "#9ea0a5",
@@ -227,7 +227,7 @@ const worker = () => {
                       backgroundColor: "#ffffff",
                     }}
                   />
-                </div>
+                </div> */}
                 <button
                   onClick={submit}
                   style={{

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import profile from "./imgProfile/profile.png";
 import map from "./imgProfile/map-pin.png";
 import mail from "./imgProfile/mail.png";
@@ -12,8 +12,25 @@ import managementWeb from "./imgProfile/managementWeb.png";
 import remainderApp2 from "./imgProfile/remainderApp2.png";
 import sosmedApp2 from "./imgProfile/sosmedApp2.png";
 import managementWeb2 from "./imgProfile/managementWeb2.png";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const router = useRouter()
+  let { id } = useParams();
+  let [worker, setWorker] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:2525/worker/${router.query.id}`)
+      .then((res) => {
+        setWorker(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   return (
     <div>
       <main style={{ backgroundColor: "#F6F7F8" }}>
@@ -41,7 +58,7 @@ const Profile = () => {
                       <Image src={profile} alt="profile" />
                     </div>
                     <p style={{ fontSize: 22, fontWeight: 600 }}>
-                      Louis Tomlinson
+                      {worker.name}
                     </p>
                     <p>Web Developer</p>
                     <div style={{ display: "flex" }}>
