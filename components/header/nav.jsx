@@ -1,15 +1,22 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./imgNav/logo.png";
 import bell from "./imgNav/bell.png";
 import mail from "./imgNav/mail.png";
 import Profile from "./imgNav/profile.png";
 
 const Nav = () => {
+  const [login, setLogin] = useState();
+
   const isLogout = () => {
     localStorage.clear();
     window.location.reload()
   };
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem("worker_id");
+    setLogin(isLogin);
+  }, []);
 
   return (
     <div>
@@ -51,8 +58,11 @@ const Nav = () => {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="navbarDropdownMenuLink"
                   >
-                    <a className="dropdown-item" href="/profile/edit">
+                    <a className="dropdown-item" href={`/profile/${login}`}>
                       Profile
+                    </a>
+                    <a className="dropdown-item" href={`/profile/edit/${login}`}>
+                      Edit profile
                     </a>
                     <a
                       className="dropdown-item"

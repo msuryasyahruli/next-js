@@ -9,26 +9,32 @@ import profile1 from "./imgLandingPage/profile1.png";
 import profile2 from "./imgLandingPage/profile2.png";
 import profile3 from "./imgLandingPage/profile3.png";
 import Link from "next/link";
+import style from "./landing.module.css";
 
 const Landing = () => {
   return (
     <div>
       <main>
         <div className="container">
-          <section className="row">
+          <section className="row mb-5">
             <div
               className="col-md-6"
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
               }}
             >
               <div style={{ width: 490 }}>
-                <p style={{ fontWeight: 600, fontSize: 44, color: "#1f2a36" }}>
+                <p
+                  className={style.txt}
+                  style={{ fontWeight: 600, color: "#1f2a36" }}
+                >
                   Talenta terbaik negri untuk perubahan revolusi 4.0
                 </p>
-                <p style={{ fontWeight: 400, fontSize: 18, color: "#46505c" }}>
+                <p
+                  className={style.script}
+                  style={{ fontWeight: 400, color: "#46505c" }}
+                >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
@@ -53,13 +59,13 @@ const Landing = () => {
               <Image src={img1} alt="img1" className="w-100 h-100" />
             </div>
           </section>
-          <section className="row">
+          <section className="row mb-5">
             <div className="col-md-6">
               <Image src={img2} alt="img2" className="w-100 h-100" />
             </div>
             <div className="col-md-6">
               <div style={{ marginTop: 30 }}>
-                <p style={{ fontWeight: 600, fontSize: 36 }}>
+                <p className={style.txt} style={{ fontWeight: 600 }}>
                   Kenapa harus mencari tallent di peworld
                 </p>
                 <div style={{ display: "flex" }}>
@@ -97,7 +103,7 @@ const Landing = () => {
               </div>
             </div>
           </section>
-          <section className="row">
+          <section className="row mb-5">
             <div
               className="col-md-6"
               style={{
@@ -107,8 +113,8 @@ const Landing = () => {
               }}
             >
               <div style={{ width: 480 }}>
-                <p style={{ fontWeight: 600, fontSize: 36 }}>Skill Tallent</p>
-                <p style={{ fontWeight: 400, fontSize: 18, color: "#46505c" }}>
+                <p className={style.txt} style={{ fontWeight: 600 }}>Skill Tallent</p>
+                <p className={style.script} style={{ fontWeight: 400, color: "#46505c" }}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
@@ -190,7 +196,7 @@ const Landing = () => {
             className="container pt-5"
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <p style={{ fontWeight: 600, fontSize: 36 }}>
+            <p className={style.txt} style={{ fontWeight: 600 }}>
               Their opinion about peworld
             </p>
           </div>
@@ -622,37 +628,40 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        <div className="container" style={{ padding: "100px 20px" }}>
+        <div className="container" style={{ padding: "50px 20px" }}>
           <div
+            className="row"
             style={{
               height: 227,
               backgroundColor: "#5e50a1",
               borderRadius: "40px 8px 40px 8px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
               padding: "0 60px",
             }}
           >
-            <div style={{ width: 293 }}>
+            <div
+              className="col-md-8 d-flex align-items-center"
+              style={{ textAlign: "center" }}
+            >
               <p style={{ fontWeight: 600, fontSize: 36, color: "white" }}>
                 Lorem ipsum dolor sit amet
               </p>
             </div>
-            <Link href="/home">
-              <button
-                style={{
-                  width: 210,
-                  height: "63.11px",
-                  borderRadius: 5,
-                  border: 0,
-                  color: "#796eaf",
-                  backgroundColor: "white",
-                }}
-              >
-                Mulai Dari Sekarang
-              </button>
-            </Link>
+            <div className="col-md-4 d-flex align-items-center justify-content-center">
+              <Link href="/home">
+                <button
+                  style={{
+                    width: 210,
+                    height: "63.11px",
+                    borderRadius: 5,
+                    border: 0,
+                    color: "#796eaf",
+                    backgroundColor: "white",
+                  }}
+                >
+                  Mulai Dari Sekarang
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>

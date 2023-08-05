@@ -12,24 +12,28 @@ import managementWeb from "./imgProfile/managementWeb.png";
 import remainderApp2 from "./imgProfile/remainderApp2.png";
 import sosmedApp2 from "./imgProfile/sosmedApp2.png";
 import managementWeb2 from "./imgProfile/managementWeb2.png";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const Profile = () => {
   const router = useRouter()
-  let { id } = useParams();
+  // const { worker_id } = router.query.id
+  // console.log(router.query.id);
+  // let { id } = useParams();
   let [worker, setWorker] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/worker/${router.query.id}`)
-      .then((res) => {
-        setWorker(res.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
+    if(router.isReady) {
+      axios
+        .get(`http://localhost:2525/worker/${router.query.id}`)
+        .then((res) => {
+          setWorker(res.data.data[0]);
+          // console.log(res.data.data[0]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   return (
     <div>
@@ -58,7 +62,7 @@ const Profile = () => {
                       <Image src={profile} alt="profile" />
                     </div>
                     <p style={{ fontSize: 22, fontWeight: 600 }}>
-                      {worker.name}
+                      {worker.worker_name}
                     </p>
                     <p>Web Developer</p>
                     <div style={{ display: "flex" }}>
@@ -72,7 +76,7 @@ const Profile = () => {
                           fontWeight: 400,
                         }}
                       >
-                        Purwokerto, Jawa Tengah
+                        {worker.worker_city}, {worker.worker_province}
                       </p>
                     </div>
                     <p
@@ -91,9 +95,7 @@ const Profile = () => {
                         fontWeight: 400,
                       }}
                     >
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                      urna. Curabitur eu lacus fringilla, vestibulum risus at.
+                      {worker.worker_deskription}
                     </p>
                     <button
                       style={{

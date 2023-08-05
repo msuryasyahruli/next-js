@@ -5,21 +5,20 @@ import map from "./imgHome/map-pin.png";
 import Link from "next/link";
 import axios from "axios";
 import Pagination from "../pagination/pagination";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 const Home = () => {
-  const router = useRouter();
   const [sort, setSort] = useState();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
   let [worker, setWorker] = useState([]);
-
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/worker`)
+      .get(`http://localhost:2525/worker`)
       .then((res) => {
-        setWorker(res.data);
+        setWorker(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -71,6 +70,7 @@ const Home = () => {
               aria-label="Search for any skill with two button addons"
               aria-describedby="button-addon4"
               onChange={(e) => setSearch(e.target.value)}
+              style={{ height: 54 }}
             />
             {/* <div className="input-group-append" id="button-addon4">
               <button
@@ -103,8 +103,9 @@ const Home = () => {
               className="form-select "
               aria-label="Default select example"
               onChange={onSelectionChange}
+              style={{ border: 0 }}
             >
-              <option selected>Sort</option>
+              <option selected>Sort by</option>
               <option value="asc">asc name</option>
               <option value="desc">desc name</option>
             </select>
@@ -127,12 +128,14 @@ const Home = () => {
             .filter((worker) => {
               return search.toLowerCase() === ""
                 ? worker
-                : worker.name.toLowerCase().includes(search.toLowerCase());
+                : worker.worker_name
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
             })
             .sort((a, b) => {
               return sort === "asc"
-                ? a.name.localeCompare(b.name)
-                : b.name.localeCompare(a.name);
+                ? a.worker_name.localeCompare(b.name)
+                : b.worker_name.localeCompare(a.name);
             })
             .map((worker) => (
               <div
@@ -152,7 +155,7 @@ const Home = () => {
                   </div>
                   <div className="col-lg-7 col-md-6">
                     <p style={{ fontSize: 22, fontWeight: 600 }}>
-                      {worker.name}
+                      {worker.worker_name}
                     </p>
                     <p
                       style={{
@@ -223,7 +226,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
-                    <Link href={`/profile/${id}`}>
+                    <Link href={`/profile/${worker.worker_id}`}>
                       <button
                         style={{
                           width: 148,

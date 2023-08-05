@@ -29,6 +29,7 @@ const worker = () => {
       .post(`http://localhost:2525/worker/login`, data)
       .then((res) => {
         localStorage.setItem("token",res.data.data.token);
+        localStorage.setItem("worker_id",res.data.data.worker_id);
         alert("Login success");
         router.push("/landingPage");
       })
