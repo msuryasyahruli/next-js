@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ModalDelete from "../../modal skill/modalDelete";
 
 const Skill = () => {
   // get all skill
@@ -38,17 +39,13 @@ const Skill = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
+    console.log(data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:2525/skill", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post("http://localhost:2525/skill", data)
       .then((res) => {
         console.log(res);
         alert("created");
@@ -63,7 +60,26 @@ const Skill = () => {
   };
 
   //delete
-
+  // const handleDelete = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .delete(`http://localhost:2525/skill/${skill_id}`, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       alert("skill deleted");
+  //       setShow(false);
+  //       window.location.reload();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert(err);
+  //       setShow(false);
+  //     });
+  // };
 
   return (
     <div>
@@ -71,23 +87,30 @@ const Skill = () => {
         className="mt-4"
         style={{ borderRadius: 8, background: "white", padding: 20 }}
       >
-        <p style={{ fontWeight: 600, fontSize: 22 }}>Skill</p>
+        <div>
+          <p style={{ fontWeight: 600, fontSize: 22 }}>Skill</p>
+        </div>
         <hr />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {skill.map((skill) => (
-            <div
-              className="border-0 mr-3 mb-3"
-              style={{
-                padding: "3px 10px",
-                height: 28,
-                borderRadius: 4,
-                border: "1px solid #fbb017",
-                background: "rgba(251, 176, 23, 0.6)",
-                textAlign: "center",
-                color: "white",
-              }}
-            >
-              {skill.skill_name}
+            <div className="row m-0 p-0">
+              {/* <div
+                className="border-0 ml-2 mb-3"
+                style={{
+                  padding: "3px 10px",
+                  height: 40,
+                  borderRadius: 4,
+                  border: "1px solid #fbb017",
+                  background: "rgba(251, 176, 23, 0.6)",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                
+              </div> */}
+              <div>
+                <ModalDelete skill_id={skill.skill_id}>{skill.skill_name}</ModalDelete>
+              </div>
             </div>
           ))}
         </div>
@@ -124,11 +147,13 @@ const Skill = () => {
                 Simpan
               </button>
             </div>
-            <input
-              type="hidden"
-              name="workerid"
-              value={(data.workerid = login)}
-            />
+            <div>
+              <input
+                type="hidden"
+                name="workerid"
+                value={(data.workerid = login)}
+              />
+            </div>
           </div>
         </form>
       </div>

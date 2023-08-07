@@ -17,12 +17,11 @@ import { useRouter } from "next/router";
 
 const Profile = () => {
   const router = useRouter()
-  // const { worker_id } = router.query.id
-  // console.log(router.query.id);
-  // let { id } = useParams();
+
+  //get worker
   let [worker, setWorker] = useState([]);
   useEffect(() => {
-    if(router.isReady) {
+    if (router.isReady) {
       axios
         .get(`http://localhost:2525/worker/${router.query.id}`)
         .then((res) => {
@@ -34,6 +33,48 @@ const Profile = () => {
         });
     }
   }, [router.isReady]);
+
+  // get all skill
+  let [skill, setSkill] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:2525/skill`)
+      .then((res) => {
+        setSkill(res.data.data);
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // get all portfolio
+  let [portfolio, setPortfolio] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:2525/portfolio`)
+      .then((res) => {
+        setPortfolio(res.data.data);
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // get all exp
+  let [exp, setExp] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:2525/exp`)
+      .then((res) => {
+        setExp(res.data.data);
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>
@@ -115,132 +156,22 @@ const Profile = () => {
                       Skill
                     </p>
                     <div style={{ display: "flex", flexWrap: "wrap" }}>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        Phyton
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        Laravel
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        Golang
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        JavaScript
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        PHP
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        HTML
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        C++
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        Kotlin
-                      </div>
-                      <div
-                        className="border-0 mr-3 mb-3"
-                        style={{
-                          padding: "3px 10px",
-                          height: 28,
-                          borderRadius: 4,
-                          border: "1px solid #fbb017",
-                          background: "rgba(251, 176, 23, 0.6)",
-                          textAlign: "center",
-                          color: "white",
-                        }}
-                      >
-                        Swift
-                      </div>
+                      {skill.map((skill) => (
+                        <div
+                          className="border-0 mr-3 mb-3"
+                          style={{
+                            padding: "3px 10px",
+                            height: 28,
+                            borderRadius: 4,
+                            border: "1px solid #fbb017",
+                            background: "rgba(251, 176, 23, 0.6)",
+                            textAlign: "center",
+                            color: "white",
+                          }}
+                        >
+                          {skill.skill_name}
+                        </div>
+                      ))}
                     </div>
                     <div className="mt-4">
                       <div style={{ display: "flex" }}>
@@ -344,72 +275,20 @@ const Profile = () => {
                         aria-labelledby="nav-Portofolio-tab"
                       >
                         <div className="row">
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={remainderApp}
-                              alt="remainderApp"
-                            />
-                            <p>Remainder app</p>
-                          </div>
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={sosmedApp}
-                              alt="sosmedApp"
-                            />
-                            <p>Social media app</p>
-                          </div>
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={managementWeb}
-                              alt="managementWeb"
-                            />
-                            <p>Project management web</p>
-                          </div>
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={remainderApp2}
-                              alt="remainderApp2"
-                            />
-                            <p>Remainder app</p>
-                          </div>
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={sosmedApp2}
-                              alt="sosmedApp2"
-                            />
-                            <p>Social media app</p>
-                          </div>
-                          <div
-                            className="col-md-4"
-                            style={{ textAlign: "center" }}
-                          >
-                            <Image
-                              className="w-100"
-                              src={managementWeb2}
-                              alt="managementWeb2"
-                            />
-                            <p>Project management web</p>
-                          </div>
+                          {portfolio.map((portfolio) => (
+                            <div
+                              className="col-md-4"
+                              style={{ textAlign: "center" }}
+                            >
+                              <img
+                                src={portfolio.photo}
+                                alt="app"
+                                crossOrigin="anonymous"
+                                style={{ width: "100%" }}
+                              />
+                              <p>{portfolio.app_name}</p>
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div
@@ -419,15 +298,16 @@ const Profile = () => {
                         aria-labelledby="nav-Pengalaman-tab"
                       >
                         <div>
+                        {exp.map((exp) => (
                           <div>
                             <div>
                               <p
                                 className="m-0 p-0"
                                 style={{ fontWeight: 600, fontSize: 20 }}
                               >
-                                Engineer
+                                {exp.position}
                               </p>
-                              <p className="m-0 p-0">Tokopedia</p>
+                              <p className="m-0 p-0">{exp.company_name}</p>
                               <div
                                 style={{
                                   display: "flex",
@@ -436,50 +316,17 @@ const Profile = () => {
                                 }}
                               >
                                 <p className="m-0 p-0">
-                                  July 2019 - January 2020
+                                {exp.working_start} - {exp.working_end}
                                 </p>
-                                <p className="ml-md-3 m-0 p-0">6 months</p>
+                                <p className="ml-md-3 m-0 p-0">x months</p>
                               </div>
                             </div>
                             <p className="mt-3" style={{ color: "#1F2A36" }}>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Vestibulum erat orci, mollis nec gravida
-                              sed, ornare quis urna. Curabitur eu lacus
-                              fringilla, vestibulum risus at.
+                            {exp.description}
                             </p>
-                          </div>
-                        </div>
                         <hr />
-                        <div>
-                          <div>
-                            <div>
-                              <p
-                                className="m-0 p-0"
-                                style={{ fontWeight: 600, fontSize: 20 }}
-                              >
-                                Web Developer
-                              </p>
-                              <p className="m-0 p-0">Tokopedia</p>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                  color: "#9EA0A5",
-                                }}
-                              >
-                                <p className="m-0 p-0">
-                                  July 2019 - January 2020
-                                </p>
-                                <p className="ml-md-3 m-0 p-0">6 months</p>
-                              </div>
-                            </div>
-                            <p className="mt-3" style={{ color: "#1F2A36" }}>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Vestibulum erat orci, mollis nec gravida
-                              sed, ornare quis urna. Curabitur eu lacus
-                              fringilla, vestibulum risus at.
-                            </p>
                           </div>
+                        ))}
                         </div>
                       </div>
                     </div>

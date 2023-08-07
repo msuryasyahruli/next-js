@@ -30,7 +30,7 @@ const Nav = () => {
             height: 100,
           }}
         >
-          <div>
+          <div href={`/landingPage`}>
             <Image src={logo} alt="logo" />
           </div>
           <div className="row">

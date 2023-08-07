@@ -1,8 +1,8 @@
-// import axios from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { updateExpAction } from "../../config/redux/actions/expAction";
-import { useDispatch } from "react-redux";
+// import { updateExpAction } from "../../config/redux/actions/expAction";
+// import { useDispatch } from "react-redux";
 
 function ModalUpdate({
   exp_id,
@@ -35,42 +35,69 @@ function ModalUpdate({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const login = localStorage.getItem("worker_id");
     axios
-      .put(`http://localhost:2525/worker/${login}`, data)
+      .put(`http://localhost:2525/exp/${exp_id}`, data)
       .then((res) => {
         setData(res.data.data[0]);
-        console.log(res.data.data[0]);
-        // alert("Data updated");
-        // setShow(false);
+        // console.log(res.data.data[0]);
+        alert("experience updated");
+        setShow(false);
         window.location.reload();
       })
       .catch((err) => {
         console.log(err);
         alert(err);
         setShow(false);
-      });  };
+      });
+  };
+
 
   return (
-    <>
+    <div>
       <Button className="m-1" variant="warning" onClick={handleShow}>
         {children}
       </Button>
       <Modal show={show}>
         <Modal.Header>
-          <Modal.Title>Update exp</Modal.Title>
+          <Modal.Title>Update Experience</Modal.Title>
         </Modal.Header>
         <form onSubmit={handleSubmit}>
           <Modal.Body>
             <input
               type="text"
               className="form-control mt-3"
-              placeholder="position"
               name="position"
               value={data.position}
               onChange={handleChange}
             />
-            
+            <input
+              type="text"
+              className="form-control mt-3"
+              name="company_name"
+              value={data.company_name}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              className="form-control mt-3"
+              name="working_start"
+              value={data.working_start}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              className="form-control mt-3"
+              name="working_end"
+              value={data.working_end}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              className="form-control mt-3"
+              name="description"
+              value={data.description}
+              onChange={handleChange}
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
@@ -82,7 +109,7 @@ function ModalUpdate({
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 }
 

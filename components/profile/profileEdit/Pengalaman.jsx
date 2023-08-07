@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import ModalUpdate from "../../exp modal/modalUpdate";
-import ModalDelete from "../../exp modal/modalDelete";
+import ModalUpdate from "../../modal exp/modalUpdate";
+import ModalDelete from "../../modal exp/modalDelete";
 
 const Pengalaman = () => {
   // get all exp
@@ -24,8 +24,8 @@ const Pengalaman = () => {
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
-      const login = localStorage.getItem("worker_id");
-      setLogin(login);
+      const isLogin = localStorage.getItem("worker_id");
+      setLogin(isLogin);
     }
   }, [router.isReady]);
 
@@ -36,30 +36,27 @@ const Pengalaman = () => {
     working_start: "",
     working_end: "",
     description: "",
-    workerid: ""
+    workerid: "",
   });
+  // console.log(data);
 
   const handleChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
+    console.log(data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:2525/exp", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post("http://localhost:2525/exp", DataTransfer)
       .then((res) => {
         console.log(res);
         alert("created");
         // setShow(false);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -67,39 +64,6 @@ const Pengalaman = () => {
         // setShow(false);
       });
   };
-
-  // update exp
-  // const [update, setUpdate] = useState({
-  //   position: "",
-  //   company_name: "",
-  //   working_start: "",
-  //   working_end: "",
-  //   description: ""
-  // });
-
-  // const changeUpdate = (e) => {
-  //   setData({
-  //     ...data,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   console.log(data);
-  // };
-
-  // const submitUpdate = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .put(`http://localhost:2525/exp/${exp_id}`, data)
-  //     .then((res) => {
-  //       setUpdate(res.data.data[0]);
-  //       console.log(res.data.data[0]);
-  //       window.location.reload();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert(err);
-  //       setShow(false);
-  //     });
-  // };
 
   return (
     <div>
@@ -130,28 +94,35 @@ const Pengalaman = () => {
                   <p className="m-0 p-0">
                     {exp.working_start} - {exp.working_end}
                   </p>
-                  <p className="ml-md-3 m-0 p-0">X months</p>
+                  <p className="ml-md-3 m-0 ml-2">X months</p>
                 </div>
               </div>
               <p className="mt-3" style={{ color: "#1F2A36" }}>
                 {exp.description}
               </p>
             </div>
-            {/* <ModalUpdate
-              exp_id={exp.exp_id}
-              position={exp.position}
-              company_name={exp.company_name}
-              working_start={exp.working_start}
-              working_end={exp.working_end}
-              description={exp.description}
-            >
-              Update
-            </ModalUpdate> */}
-            {/* <ModalDelete exp_id={exp.exp_id}>Delete</ModalDelete> */}
+            <div className="row pl-3">
+              <ModalUpdate
+                exp_id={exp.exp_id}
+                position={exp.position}
+                company_name={exp.company_name}
+                working_start={exp.working_start}
+                working_end={exp.working_end}
+                description={exp.description}
+              >
+                Update
+              </ModalUpdate>
+              <ModalDelete exp_id={exp.exp_id}>X</ModalDelete>
+            </div>
             <hr />
           </div>
         ))}
         <form onSubmit={handleSubmit}>
+          <input
+            type="hidden"
+            name="workerid"
+            value={(data.workerid = login)}
+          />
           <div>
             <p
               style={{
@@ -276,11 +247,6 @@ const Pengalaman = () => {
               name="description"
             />
           </div>
-          <input
-            type="hidden"
-            name="workerid"
-            value={(data.workerid = login)}
-          />
           <hr />
           <button
             type="submit"

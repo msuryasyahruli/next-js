@@ -1,32 +1,48 @@
-// import axios from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { deleteExpAction } from "../../config/redux/actions/expAction";
+// import { useDispatch } from "react-redux";
+// import { deleteExpAction } from "../../config/redux/actions/expAction";
 
 function ModalDelete({exp_id,children}) {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(deleteExpAction(exp_id, setShow))
+    axios
+      .delete(`http://localhost:2525/exp/${exp_id}`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert("experience deleted");
+        setShow(false);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+        setShow(false);
+      });
   };
 
   return (
-    <>
+    <div>
       <Button className="m-1" variant="danger" onClick={handleShow}>
         {children}
       </Button>
       <Modal show={show}>
         <Modal.Header>
-          <Modal.Title>Delete product</Modal.Title>
+          <Modal.Title>Delete Experience</Modal.Title>
         </Modal.Header>
         <form onSubmit={handleSubmit}>
           <Modal.Body>
-            <h4 className="text-center">Are you sure wannna delete this product?</h4>
+            <h4 className="text-center">Are you sure wannna delete this Experience?</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
@@ -38,7 +54,7 @@ function ModalDelete({exp_id,children}) {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 }
 

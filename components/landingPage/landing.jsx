@@ -201,7 +201,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="container pb-5">
-            <div
+            {/* <div
               id="carouselExampleIndicators"
               className="carousel slide row"
               data-ride="carousel"
@@ -231,6 +231,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -292,6 +293,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -353,6 +355,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -422,6 +425,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -483,6 +487,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -544,6 +549,7 @@ const Landing = () => {
                         height: 437,
                         backgroundColor: "white",
                         padding: 30,
+                        margin: 5,
                       }}
                     >
                       <div
@@ -625,7 +631,199 @@ const Landing = () => {
                 />
                 <span className="sr-only">Next</span>
               </button>
-            </div>
+            </div> */}
+            <section
+              className="row"
+            >
+              <div
+                className="col-md-4 mt-2"
+                style={{
+                  height: 437,
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    textAlign: "center",
+                    backgroundColor: "white",
+                    borderRadius: 10,
+                    padding: 25
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 140,
+                      height: 140,
+                      borderRadius: "100%",
+                      backgroundColor: "#fbb0175e",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image src={profile1} alt="profile" />
+                  </div>
+                  <p
+                    style={{
+                      fontWeight: 600,
+                      fontSize: 30,
+                      width: "fit-content",
+                    }}
+                  >
+                    Harry Styles
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#9ea0a5",
+                      width: "fit-content",
+                    }}
+                  >
+                    Web Developer
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#46505c",
+                      width: "fit-content",
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. In euismod ipsum et dui rhoncus auctor.
+                  </p>
+                </div>
+              </div>
+              <div
+                className="col-md-4 mt-2"
+                style={{
+                  height: 437,
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    textAlign: "center",
+                    backgroundColor: "white",
+                    borderRadius: 10,
+                    padding: 25
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 140,
+                      height: 140,
+                      borderRadius: "100%",
+                      backgroundColor: "#fbb0175e",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image src={profile2} alt="profile" />
+                  </div>
+                  <p
+                    style={{
+                      fontWeight: 600,
+                      fontSize: 30,
+                      width: "fit-content",
+                    }}
+                  >
+                    Niall Horan
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#9ea0a5",
+                      width: "fit-content",
+                    }}
+                  >
+                    Web Developer
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#46505c",
+                      width: "fit-content",
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit.
+                  </p>
+                </div>
+              </div>
+              <div
+                className="col-md-4 mt-2"
+                style={{
+                  height: 437,
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    textAlign: "center",
+                    backgroundColor: "white",
+                    borderRadius: 10,
+                    padding: 25
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 140,
+                      height: 140,
+                      borderRadius: "100%",
+                      backgroundColor: "#fbb0175e",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image src={profile3} alt="profile" />
+                  </div>
+                  <p
+                    style={{
+                      fontWeight: 600,
+                      fontSize: 30,
+                      width: "fit-content",
+                    }}
+                  >
+                    Louis Tomlinson
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#9ea0a5",
+                      width: "fit-content",
+                    }}
+                  >
+                    Web Developer
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: 400,
+                      fontSize: 18,
+                      color: "#46505c",
+                      width: "fit-content",
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur
+                  </p>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
         <div className="container" style={{ padding: "50px 20px" }}>

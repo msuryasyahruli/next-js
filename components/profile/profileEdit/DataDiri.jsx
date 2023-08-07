@@ -1,24 +1,8 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const DataDiri = () => {
-  const router = useRouter();
-  let [worker, setWorker] = useState([]);
-  useEffect(() => {
-    if (router.isReady) {
-      axios
-        .get(`http://localhost:2525/worker/${router.query.id}`)
-        .then((res) => {
-          setWorker(res.data.data[0]);
-          // console.log(res.data.data[0]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [router.isReady]);
-
+  //update profile
   const [data, setData] = useState({
     name: "",
     province: "",
@@ -29,19 +13,13 @@ const DataDiri = () => {
 
   // console.log(data);
 
-  //   const [photo, setPhoto] = useState(null);
-
   const handleChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
+    console.log(data);
   };
-
-  //   const handleUpload = (e) => {
-  //     setPhoto(e.target.files[0]);
-  //   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,8 +29,8 @@ const DataDiri = () => {
       .then((res) => {
         setData(res.data.data[0]);
         // console.log(res.data.data[0]);
-        // alert("Data updated");
-        // setShow(false);
+        alert("Data updated");
+        setShow(false);
         window.location.reload();
       })
       .catch((err) => {
@@ -87,7 +65,7 @@ const DataDiri = () => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={worker.name}
+              value={data.name}
               onChange={handleChange}
               name="name"
             />
@@ -133,7 +111,7 @@ const DataDiri = () => {
                   borderRadius: 4,
                   border: "1px solid #e2e5ed",
                 }}
-                value={worker.city}
+                value={data.city}
                 onChange={handleChange}
                 name="city"
               />
@@ -157,7 +135,7 @@ const DataDiri = () => {
                   borderRadius: 4,
                   border: "1px solid #e2e5ed",
                 }}
-                value={worker.province}
+                value={data.province}
                 onChange={handleChange}
                 name="province"
               />
@@ -182,7 +160,7 @@ const DataDiri = () => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={worker.workplace}
+              value={data.workplace}
               onChange={handleChange}
               name="workplace"
             />
@@ -206,9 +184,9 @@ const DataDiri = () => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={worker.description}
-              onChange={handleChange}
               name="description"
+              value={data.description}
+              onChange={handleChange}
             />
           </div>
           <button
