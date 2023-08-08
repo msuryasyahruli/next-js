@@ -6,12 +6,12 @@ import mail from "./imgProfile/mail.png";
 import instagram from "./imgProfile/instagram.png";
 import github from "./imgProfile/github.png";
 import gitlab from "./imgProfile/gitlab.png";
-import remainderApp from "./imgProfile/remainderApp.png";
-import sosmedApp from "./imgProfile/sosmedApp.png";
-import managementWeb from "./imgProfile/managementWeb.png";
-import remainderApp2 from "./imgProfile/remainderApp2.png";
-import sosmedApp2 from "./imgProfile/sosmedApp2.png";
-import managementWeb2 from "./imgProfile/managementWeb2.png";
+// import remainderApp from "./imgProfile/remainderApp.png";
+// import sosmedApp from "./imgProfile/sosmedApp.png";
+// import managementWeb from "./imgProfile/managementWeb.png";
+// import remainderApp2 from "./imgProfile/remainderApp2.png";
+// import sosmedApp2 from "./imgProfile/sosmedApp2.png";
+// import managementWeb2 from "./imgProfile/managementWeb2.png";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -37,44 +37,50 @@ const Profile = () => {
   // get all skill
   let [skill, setSkill] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/skill`)
-      .then((res) => {
-        setSkill(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      axios
+        .get(`http://localhost:2525/skill/${router.query.id}`)
+        .then((res) => {
+          setSkill(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   // get all portfolio
   let [portfolio, setPortfolio] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/portfolio`)
-      .then((res) => {
-        setPortfolio(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      axios
+        .get(`http://localhost:2525/portfolio/${router.query.id}`)
+        .then((res) => {
+          setPortfolio(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   // get all exp
   let [exp, setExp] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/exp`)
-      .then((res) => {
-        setExp(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      axios
+        .get(`http://localhost:2525/exp/${router.query.id}`)
+        .then((res) => {
+          setExp(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   return (
     <div>
@@ -100,12 +106,14 @@ const Profile = () => {
                       className="pt-3 pb-3"
                       style={{ display: "flex", justifyContent: "center" }}
                     >
-                      <Image src={profile} alt="profile" />
+                      <div style={{ width: "150px", height: "150px" }}>
+                        <Image src={profile} alt="profile" style={{ width: "100%", height: "100%", borderRadius: "100%" }} />
+                      </div>
                     </div>
                     <p style={{ fontSize: 22, fontWeight: 600 }}>
                       {worker.worker_name}
                     </p>
-                    <p>Web Developer</p>
+                    <p>{worker.worker_jobdesk}</p>
                     <div style={{ display: "flex" }}>
                       <div className="mr-2">
                         <Image src={map} alt="map" />
@@ -127,7 +135,7 @@ const Profile = () => {
                         fontWeight: 400,
                       }}
                     >
-                      Freelancer
+                      {worker.worker_workplace}
                     </p>
                     <p
                       style={{
@@ -136,7 +144,7 @@ const Profile = () => {
                         fontWeight: 400,
                       }}
                     >
-                      {worker.worker_deskription}
+                      {worker.worker_description}
                     </p>
                     <button
                       style={{
@@ -284,7 +292,7 @@ const Profile = () => {
                                 src={portfolio.photo}
                                 alt="app"
                                 crossOrigin="anonymous"
-                                style={{ width: "100%" }}
+                                style={{ width: "100%", borderRadius: 5 }}
                               />
                               <p>{portfolio.app_name}</p>
                             </div>
@@ -298,35 +306,35 @@ const Profile = () => {
                         aria-labelledby="nav-Pengalaman-tab"
                       >
                         <div>
-                        {exp.map((exp) => (
-                          <div>
+                          {exp.map((exp) => (
                             <div>
-                              <p
-                                className="m-0 p-0"
-                                style={{ fontWeight: 600, fontSize: 20 }}
-                              >
-                                {exp.position}
-                              </p>
-                              <p className="m-0 p-0">{exp.company_name}</p>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                  color: "#9EA0A5",
-                                }}
-                              >
-                                <p className="m-0 p-0">
-                                {exp.working_start} - {exp.working_end}
+                              <div>
+                                <p
+                                  className="m-0 p-0"
+                                  style={{ fontWeight: 600, fontSize: 20 }}
+                                >
+                                  {exp.position}
                                 </p>
-                                <p className="ml-md-3 m-0 p-0">x months</p>
+                                <p className="m-0 p-0">{exp.company_name}</p>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    color: "#9EA0A5",
+                                  }}
+                                >
+                                  <p className="m-0 p-0">
+                                    {exp.working_start} - {exp.working_end}
+                                  </p>
+                                  <p className="ml-md-3 m-0 p-0">x months</p>
+                                </div>
                               </div>
+                              <p className="mt-3" style={{ color: "#1F2A36" }}>
+                                {exp.description}
+                              </p>
+                              <hr />
                             </div>
-                            <p className="mt-3" style={{ color: "#1F2A36" }}>
-                            {exp.description}
-                            </p>
-                        <hr />
-                          </div>
-                        ))}
+                          ))}
                         </div>
                       </div>
                     </div>

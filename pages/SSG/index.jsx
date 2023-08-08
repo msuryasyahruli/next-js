@@ -148,7 +148,7 @@ function SSG({ worker }) {
                         {worker.worker_city}, {worker.worker_province}
                       </p>
                     </div>
-                    <Skill />
+                    {/* <Skill /> */}
                   </div>
                   <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
                     <Link href={`/profile/${worker.worker_id}`}>

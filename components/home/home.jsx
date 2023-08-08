@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import profile1 from "./imgHome/profile1.png";
+import profile1 from "./imgHome/profile.png";
 import map from "./imgHome/map-pin.png";
 import Link from "next/link";
 import axios from "axios";
 import Pagination from "../pagination/pagination";
+import { useRouter } from "next/router";
 // import { useRouter } from "next/router";
 
 const Home = () => {
@@ -35,10 +36,12 @@ const Home = () => {
   const currentPosts = worker.slice(firstPostIndex, lastPostIndex);
 
   //get skill
+  const router = useRouter();
   let [skill, setSkill] = useState([]);
   useEffect(() => {
+    if (router.isReady) {
     axios
-      .get(`http://localhost:2525/skill`)
+      .get(`http://localhost:2525/skill/${router.query.id}`)
       .then((res) => {
         setSkill(res.data.data);
         // console.log(res.data.data);
@@ -46,7 +49,8 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    }
+  }, [router.isReady]);
 
   return (
     <div>
@@ -157,13 +161,12 @@ const Home = () => {
                 style={{ backgroundColor: "white", borderRadius: 10 }}
               >
                 <div className="row">
-                  <div className="col-lg-2 col-md-3">
+                  <div className="col-lg-2 col-md-3 d-flex justify-content-center">
                     <div style={{ width: "120px", height: "120px" }}>
                       <Image
-                        className="w-100 h-100"
                         src={profile1}
                         alt="profile"
-                        style={{ height: 120, width: 120 }}
+                        style={{ height: "100%", width: "100%", borderRadius: "100%" }}
                       />
                     </div>
                   </div>
@@ -178,7 +181,7 @@ const Home = () => {
                         fontWeight: 400,
                       }}
                     >
-                      Web developer
+                      {worker.worker_jobdesk}
                     </p>
                     <div style={{ display: "flex" }}>
                       <div className="pr-2">

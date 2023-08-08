@@ -6,21 +6,24 @@ import ModalDelete from "../../modal exp/modalDelete";
 
 const Pengalaman = () => {
   // get all exp
-  let [exp, setExp] = useState([]);
+  const router = useRouter();
+  const [exp, setExp] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/exp`)
-      .then((res) => {
-        setExp(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      const islogin = localStorage.getItem("worker_id");
+      axios
+        .get(`http://localhost:2525/exp/${islogin}`)
+        .then((res) => {
+          setExp(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   //login
-  const router = useRouter();
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
@@ -51,12 +54,12 @@ const Pengalaman = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:2525/exp", DataTransfer)
+      .post("http://localhost:2525/exp", data)
       .then((res) => {
         console.log(res);
         alert("created");
         // setShow(false);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -75,44 +78,46 @@ const Pengalaman = () => {
         <hr />
         {exp.map((exp) => (
           <div>
-            <div>
-              <div>
-                <p
-                  className="m-0 p-0"
-                  style={{ fontWeight: 600, fontSize: 20 }}
-                >
-                  {exp.position}
-                </p>
-                <p className="m-0 p-0">{exp.company_name}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    color: "#9EA0A5",
-                  }}
-                >
-                  <p className="m-0 p-0">
-                    {exp.working_start} - {exp.working_end}
+            <div className="row">
+              <div className="col-md-9">
+                <div>
+                  <p
+                    className="m-0 p-0"
+                    style={{ fontWeight: 600, fontSize: 20 }}
+                  >
+                    {exp.position}
                   </p>
-                  <p className="ml-md-3 m-0 ml-2">X months</p>
+                  <p className="m-0 p-0">{exp.company_name}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      color: "#9EA0A5",
+                    }}
+                  >
+                    <p className="m-0 p-0">
+                      {exp.working_start} - {exp.working_end}
+                    </p>
+                    <p className="ml-md-3 m-0 ml-2">X months</p>
+                  </div>
                 </div>
+                <p className="mt-3" style={{ color: "#1F2A36" }}>
+                  {exp.description}
+                </p>
               </div>
-              <p className="mt-3" style={{ color: "#1F2A36" }}>
-                {exp.description}
-              </p>
-            </div>
-            <div className="row pl-3">
-              <ModalUpdate
-                exp_id={exp.exp_id}
-                position={exp.position}
-                company_name={exp.company_name}
-                working_start={exp.working_start}
-                working_end={exp.working_end}
-                description={exp.description}
-              >
-                Update
-              </ModalUpdate>
-              <ModalDelete exp_id={exp.exp_id}>X</ModalDelete>
+              <div className="d-flex col-md-3 justify-content-md-center">
+                <ModalUpdate
+                  exp_id={exp.exp_id}
+                  position={exp.position}
+                  company_name={exp.company_name}
+                  working_start={exp.working_start}
+                  working_end={exp.working_end}
+                  description={exp.description}
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </ModalUpdate>
+                <ModalDelete exp_id={exp.exp_id}><i class="bi bi-trash"></i></ModalDelete>
+              </div>
             </div>
             <hr />
           </div>

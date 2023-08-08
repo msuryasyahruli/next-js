@@ -78,14 +78,14 @@ function ModalUpdate({
               onChange={handleChange}
             />
             <input
-              type="text"
+              type="date"
               className="form-control mt-3"
               name="working_start"
               value={data.working_start}
               onChange={handleChange}
             />
             <input
-              type="text"
+              type="date"
               className="form-control mt-3"
               name="working_end"
               value={data.working_end}

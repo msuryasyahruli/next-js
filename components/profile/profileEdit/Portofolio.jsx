@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import upload from "../imgEditProfile/upload.png";
 import Image from "next/image";
 import axios from "axios";
@@ -8,21 +8,24 @@ import ModalDelete from "../../modal portfolio/modalDelete";
 
 const Portofolio = () => {
   // get all portfolio
-  let [portfolio, setPortfolio] = useState([]);
+  const router = useRouter();
+  const [portfolio, setPortfolio] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/portfolio`)
-      .then((res) => {
-        setPortfolio(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      const islogin = localStorage.getItem("worker_id");
+      axios
+        .get(`http://localhost:2525/portfolio/${islogin}`)
+        .then((res) => {
+          setPortfolio(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   //login
-  const router = useRouter();
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
@@ -49,7 +52,14 @@ const Portofolio = () => {
 
   const [photo, setPhoto] = useState(null);
 
+  const inputRef = useRef(null)
+  const handleImgClink = () => {
+    inputRef.current.click()
+  }
+
   const handleUpload = (e) => {
+    const file = e.target.files;
+    console.log(file);
     setPhoto(e.target.files[0]);
   };
 
@@ -93,32 +103,32 @@ const Portofolio = () => {
         {portfolio.map((portfolio) => (
           <div>
             <div className="row mb-3 mt-2">
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <img
                   src={portfolio.photo}
                   alt="app"
                   crossOrigin="anonymous"
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", borderRadius: 5 }}
                 />
               </div>
               <div className="col-md-6">
-                <p className="m-0 p-0" style={{ fontWeight: 600 }}>{portfolio.app_name}</p>
+                <p className="mt-2 p-0" style={{ fontWeight: 600 }}>{portfolio.app_name}</p>
                 <p className="m-0 p-0">{portfolio.link_repo}</p>
-                <p className="m-0 p-0">{portfolio.tipe}</p>
+                <p className="mb-3 p-0">{portfolio.tipe}</p>
               </div>
-              <div className="col-md-3 d-flex justify-content-center">
+              <div className="col-md-2 d-flex justify-content-md-center">
                 <ModalUpdate
                   portfolio_id={portfolio.portfolio_id}
                   app_name={portfolio.app_name}
                   link_repo={portfolio.link_repo}
                   tipe={portfolio.tipe}
                 >
-                  Update
+                  <i class="bi bi-pencil-square"></i>
                 </ModalUpdate>
-                <ModalDelete portfolio_id={portfolio.portfolio_id}>x</ModalDelete>
+                <ModalDelete portfolio_id={portfolio.portfolio_id}><i class="bi bi-trash"></i></ModalDelete>
               </div>
             </div>
-              <hr />
+            <hr />
           </div>
         ))}
         <form onSubmit={handleSubmit}>
@@ -235,11 +245,15 @@ const Portofolio = () => {
                 flexDirection: "column",
               }}
             >
-              <div>
-                <Image src={upload} alt="uploadImg" />
+              <div onClick={handleImgClink}>
+                {/* {Image ? (
+                  <img src={URL.createObjectURL(Image)} alt="img" />
+                ) : ( */}
+                  <Image src={upload} alt="uploadImg" />
+                {/* )} */}
+                <input className="border" type="file" ref={inputRef} name="photo"
+                  onChange={handleUpload} style={{ display: "none" }} />
               </div>
-              <input className="border" type="file" name="photo"
-                onChange={handleUpload} />
             </div>
             <div>
               <input

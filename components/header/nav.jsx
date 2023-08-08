@@ -66,7 +66,7 @@ const Nav = () => {
                     </a>
                     <a
                       className="dropdown-item"
-                      href="#logout"
+                      href="/landingPage"
                       onClick={isLogout}
                     >
                       Log Out

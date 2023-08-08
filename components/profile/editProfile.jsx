@@ -46,10 +46,12 @@ const EditProfile = () => {
                     className="pt-3 pb-3"
                     style={{ display: "flex", justifyContent: "center" }}
                   >
-                    <Image src={profile} alt="profile" />
+                    <div style={{ width: "150px", height: "150px" }}>
+                        <Image src={profile} alt="profile" style={{ width: "100%", height: "100%", borderRadius: "100%" }} />
+                      </div>
                   </div>
                   <p style={{ fontSize: 22, fontWeight: 600 }}>{worker.worker_name}</p>
-                  <p>Web Developer</p>
+                  <p>{worker.worker_jobdesk}</p>
                   <div style={{ display: "flex" }}>
                     <div className="mr-2">
                       <Image src={map} alt="map" />

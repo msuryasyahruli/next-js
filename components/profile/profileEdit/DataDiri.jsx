@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const DataDiri = () => {
+const DataDiri = (name) => {
   //update profile
   const [data, setData] = useState({
     name: "",
+    jobdesk: "",
     province: "",
     city: "",
     workplace: "",
@@ -30,13 +31,13 @@ const DataDiri = () => {
         setData(res.data.data[0]);
         // console.log(res.data.data[0]);
         alert("Data updated");
-        setShow(false);
+        // setShow(false);
         window.location.reload();
       })
       .catch((err) => {
         console.log(err);
         alert(err);
-        setShow(false);
+        // setShow(false);
       });
   };
 
@@ -89,6 +90,9 @@ const DataDiri = () => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
+              value={data.jobdesk}
+              onChange={handleChange}
+              name="jobdesk"
             />
           </div>
           <div className="row">

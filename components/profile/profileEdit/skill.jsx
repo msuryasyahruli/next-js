@@ -2,24 +2,28 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ModalDelete from "../../modal skill/modalDelete";
+import Swal from "sweetalert2";
 
 const Skill = () => {
   // get all skill
-  let [skill, setSkill] = useState([]);
+  const router = useRouter();
+  const [skill, setSkill] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:2525/skill`)
-      .then((res) => {
-        setSkill(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (router.isReady) {
+      const islogin = localStorage.getItem("worker_id");
+      axios
+        .get(`http://localhost:2525/skill/${islogin}`)
+        .then((res) => {
+          setSkill(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   //login
-  const router = useRouter();
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
@@ -39,7 +43,7 @@ const Skill = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = (e) => {
@@ -48,7 +52,11 @@ const Skill = () => {
       .post("http://localhost:2525/skill", data)
       .then((res) => {
         console.log(res);
-        alert("created");
+        alert("Created");
+        // Swal.fire(
+        //   'Created!',
+        //   'success'
+        // )
         // setShow(false);
         window.location.reload();
       })
@@ -60,26 +68,17 @@ const Skill = () => {
   };
 
   //delete
-  // const handleDelete = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .delete(`http://localhost:2525/skill/${skill_id}`, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       alert("skill deleted");
-  //       setShow(false);
-  //       window.location.reload();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert(err);
-  //       setShow(false);
-  //     });
-  // };
+  const handleDeleteSkill = (skill_id) => {
+    const deleteSkills = skill.filter((s) => s.skill_id !== skill_id);
+    setSkill(deleteSkills);
+    axios.delete(`http://localhost:2525/skill/${skill_id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -94,7 +93,7 @@ const Skill = () => {
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {skill.map((skill) => (
             <div className="row m-0 p-0">
-              {/* <div
+              <div
                 className="border-0 ml-2 mb-3"
                 style={{
                   padding: "3px 10px",
@@ -106,11 +105,19 @@ const Skill = () => {
                   color: "white",
                 }}
               >
-                
-              </div> */}
-              <div>
-                <ModalDelete skill_id={skill.skill_id}>{skill.skill_name}</ModalDelete>
+                {skill.skill_name}
+                {/* <button className="onclick">x</button> */}
+                <button
+                  className="btn"
+                  style={{ borderRadius: '50%', padding: 5 }}
+                  onClick={() => handleDeleteSkill(skill.skill_id)}
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
               </div>
+              {/* <div>
+                <ModalDelete skill_id={skill.skill_id}></ModalDelete>
+              </div> */}
             </div>
           ))}
         </div>
