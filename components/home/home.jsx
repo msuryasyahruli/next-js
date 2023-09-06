@@ -13,13 +13,12 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
-  let [worker, setWorker] = useState([]);
+  const [worker, setWorker] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:2525/worker`)
+      .get(`${process.env.NEXT_PUBLIC_API}/worker`)
       .then((res) => {
         setWorker(res.data.data);
-        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,14 +36,13 @@ const Home = () => {
 
   //get skill
   const router = useRouter();
-  let [skill, setSkill] = useState([]);
+  const [skill, setSkill] = useState([]);
   useEffect(() => {
     if (router.isReady) {
     axios
-      .get(`http://localhost:2525/skill/${router.query.id}`)
+      .get(`${process.env.NEXT_PUBLIC_API}/${router.query.id}`)
       .then((res) => {
         setSkill(res.data.data);
-        // console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);

@@ -6,27 +6,20 @@ import mail from "./imgProfile/mail.png";
 import instagram from "./imgProfile/instagram.png";
 import github from "./imgProfile/github.png";
 import gitlab from "./imgProfile/gitlab.png";
-// import remainderApp from "./imgProfile/remainderApp.png";
-// import sosmedApp from "./imgProfile/sosmedApp.png";
-// import managementWeb from "./imgProfile/managementWeb.png";
-// import remainderApp2 from "./imgProfile/remainderApp2.png";
-// import sosmedApp2 from "./imgProfile/sosmedApp2.png";
-// import managementWeb2 from "./imgProfile/managementWeb2.png";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const Profile = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   //get worker
-  let [worker, setWorker] = useState([]);
+  const [worker, setWorker] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:2525/worker/${router.query.id}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/worker/${router.query.id}`)
         .then((res) => {
           setWorker(res.data.data[0]);
-          // console.log(res.data.data[0]);
         })
         .catch((err) => {
           console.log(err);
@@ -35,14 +28,13 @@ const Profile = () => {
   }, [router.isReady]);
 
   // get all skill
-  let [skill, setSkill] = useState([]);
+  const [skill, setSkill] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:2525/skill/${router.query.id}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/skill/${router.query.id}`)
         .then((res) => {
           setSkill(res.data.data);
-          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -51,14 +43,13 @@ const Profile = () => {
   }, [router.isReady]);
 
   // get all portfolio
-  let [portfolio, setPortfolio] = useState([]);
+  const [portfolio, setPortfolio] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:2525/portfolio/${router.query.id}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/portfolio/${router.query.id}`)
         .then((res) => {
           setPortfolio(res.data.data);
-          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -67,14 +58,13 @@ const Profile = () => {
   }, [router.isReady]);
 
   // get all exp
-  let [exp, setExp] = useState([]);
+  const [exp, setExp] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:2525/exp/${router.query.id}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/exp/${router.query.id}`)
         .then((res) => {
           setExp(res.data.data);
-          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -107,7 +97,15 @@ const Profile = () => {
                       style={{ display: "flex", justifyContent: "center" }}
                     >
                       <div style={{ width: "150px", height: "150px" }}>
-                        <Image src={profile} alt="profile" style={{ width: "100%", height: "100%", borderRadius: "100%" }} />
+                        <Image
+                          src={profile}
+                          alt="profile"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "100%",
+                          }}
+                        />
                       </div>
                     </div>
                     <p style={{ fontSize: 22, fontWeight: 600 }}>

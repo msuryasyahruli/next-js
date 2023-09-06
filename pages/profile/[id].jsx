@@ -3,6 +3,7 @@ import Profile from "../../components/profile/profile";
 import Nav from "../../components/header/nav";
 import Footer from "../../components/footer/footer";
 import Navlogin from "../../components/header/navlogin";
+import ProfileRecruiter from "../../components/profile recruit/profileRecruiter";
 
 const index = () => {
   const [login, setLogin] = useState();
@@ -11,15 +12,13 @@ const index = () => {
     setLogin(login);
   }, []);
   
-  if (login) {
-    return (
-      <>
-        <Nav />
-        <Profile />
-        <Footer />
-      </>
-    );
-  } else {
+  const [role, setRole] = useState();
+  useEffect(() => {
+    const isRole = localStorage.getItem("role");
+    setRole(isRole);
+  }, []);
+  
+  if (!login) {
     return (
       <>
         <Navlogin />
@@ -27,7 +26,22 @@ const index = () => {
         <Footer />
       </>
     );
-    
+  } else if (role === "worker") {
+    return (
+      <>
+        <Nav />
+        <Profile />
+        <Footer />
+      </>
+    );
+  } {
+    return (
+      <>
+        <Nav />
+        <ProfileRecruiter />
+        <Footer />
+      </>
+    );
   }
 };
 

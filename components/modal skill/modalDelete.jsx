@@ -13,7 +13,7 @@ function ModalDelete({skill_id,children}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:2525/skill/${skill_id}`, {
+      .delete(`${process.env.NEXT_PUBLIC_API}/skill/${skill_id}`, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

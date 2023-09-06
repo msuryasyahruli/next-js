@@ -7,7 +7,7 @@ const Footer = () => {
     <div>
       <footer style={{ backgroundColor: "#5e50a1" }}>
         <div className="container pt-3">
-          <Image src={logo} style={{ margin: "20px 0" }}/>
+          <Image src={logo} style={{ margin: "20px 0" }} alt="logo"/>
           
           <p style={{ color: "white", width: 330 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod

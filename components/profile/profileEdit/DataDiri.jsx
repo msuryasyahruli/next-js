@@ -1,45 +1,55 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const DataDiri = (name) => {
   //update profile
   const [data, setData] = useState({
-    name: "",
-    jobdesk: "",
-    province: "",
-    city: "",
-    workplace: "",
-    description: "",
+    worker_name: "",
+    worker_jobdesk: "",
+    worker_province: "",
+    worker_city: "",
+    worker_workplace: "",
+    worker_description: "",
   });
-
-  // console.log(data);
 
   const handleChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const login = localStorage.getItem("worker_id");
+    const login = localStorage.getItem("user_id");
     axios
-      .put(`http://localhost:2525/worker/${login}`, data)
+      .put(`${process.env.NEXT_PUBLIC_API}/worker/${login}`, data)
       .then((res) => {
         setData(res.data.data[0]);
-        // console.log(res.data.data[0]);
         alert("Data updated");
-        // setShow(false);
-        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
         alert(err);
-        // setShow(false);
       });
   };
+
+  const router = useRouter();
+  useEffect(() => {
+    if (router.isReady) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_API}/worker/${router.query.id}`)
+        .then((res) => {
+          setData(res.data.data[0]);
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.isReady]);
 
   return (
     <div>
@@ -66,9 +76,9 @@ const DataDiri = (name) => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={data.name}
+              value={data.worker_name}
               onChange={handleChange}
-              name="name"
+              name="worker_name"
             />
           </div>
           <div>
@@ -90,9 +100,9 @@ const DataDiri = (name) => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={data.jobdesk}
+              value={data.worker_jobdesk}
               onChange={handleChange}
-              name="jobdesk"
+              name="worker_jobdesk"
             />
           </div>
           <div className="row">
@@ -115,9 +125,9 @@ const DataDiri = (name) => {
                   borderRadius: 4,
                   border: "1px solid #e2e5ed",
                 }}
-                value={data.city}
+                value={data.worker_city}
                 onChange={handleChange}
-                name="city"
+                name="worker_city"
               />
             </div>
             <div className="col-6">
@@ -139,9 +149,9 @@ const DataDiri = (name) => {
                   borderRadius: 4,
                   border: "1px solid #e2e5ed",
                 }}
-                value={data.province}
+                value={data.worker_province}
                 onChange={handleChange}
-                name="province"
+                name="worker_province"
               />
             </div>
           </div>
@@ -164,9 +174,9 @@ const DataDiri = (name) => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              value={data.workplace}
+              value={data.worker_workplace}
               onChange={handleChange}
-              name="workplace"
+              name="worker_workplace"
             />
           </div>
           <div>
@@ -188,8 +198,8 @@ const DataDiri = (name) => {
                 borderRadius: 4,
                 border: "1px solid #e2e5ed",
               }}
-              name="description"
-              value={data.description}
+              name="worker_description"
+              value={data.worker_description}
               onChange={handleChange}
             />
           </div>
@@ -204,7 +214,7 @@ const DataDiri = (name) => {
               border: "1px solid #fbb017",
             }}
           >
-            Tambah
+            Simpan
           </button>
         </form>
       </div>

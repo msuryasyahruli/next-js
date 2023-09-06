@@ -8,12 +8,14 @@ import style from "./login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const worker = () => {
+const recruiter = () => {
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
+    recruiter_name: "",
+    recruiter_email: "",
+    recruiter_phone: "",
+    recruiter_password: "",
+    company_name: "",
+    recruiter_position: "",
   });
 
   const change = (e) => {
@@ -21,17 +23,17 @@ const worker = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
+    console.log(data);
   };
 
   const router = useRouter();
 
   const submit = (e) => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_API}/worker/register`, data)
+      .post(`${process.env.NEXT_PUBLIC_API}/recruiter/register`, data)
       .then((res) => {
         alert("Register success");
-        router.push("/login/worker");
+        router.push("/login/recruiter");
       })
       .catch((err) => {
         console.log(err);
@@ -106,6 +108,7 @@ const worker = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
+
                 <div>
                   <p
                     style={{
@@ -118,8 +121,8 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
-                    name="name"
-                    id="name"
+                    name="recruiter_name"
+                    id="recruiter_name"
                     placeholder="Masukan nama panjang"
                     onChange={change}
                     style={{
@@ -143,10 +146,60 @@ const worker = () => {
                   </p>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
+                    name="recruiter_email"
+                    id="recruiter_email"
                     placeholder="Masukan alamat email"
                     onChange={change}
+                    style={{
+                      width: "100%",
+                      height: 50,
+                      borderRadius: 4,
+                      border: "1px solid #e2e5ed",
+                      backgroundColor: "#ffffff",
+                    }}
+                  />
+                </div>
+                <div>
+                  <p
+                    style={{
+                      color: "#9ea0a5",
+                      fontSize: 12,
+                      margin: "30px 0 0 0",
+                    }}
+                  >
+                    Perusahaan
+                  </p>
+                  <input
+                    type="text"
+                    name="company_name"
+                    id="company_name"
+                    onChange={change}
+                    placeholder="Masukan nama perusahaan"
+                    style={{
+                      width: "100%",
+                      height: 50,
+                      borderRadius: 4,
+                      border: "1px solid #e2e5ed",
+                      backgroundColor: "#ffffff",
+                    }}
+                  />
+                </div>
+                <div>
+                  <p
+                    style={{
+                      color: "#9ea0a5",
+                      fontSize: 12,
+                      margin: "30px 0 0 0",
+                    }}
+                  >
+                    Jabatan
+                  </p>
+                  <input
+                    type="text"
+                    name="recruiter_position"
+                    id="recruiter_position"
+                    onChange={change}
+                    placeholder="Posisi di perusahaan Anda"
                     style={{
                       width: "100%",
                       height: 50,
@@ -168,10 +221,10 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
-                    name="phone"
-                    id="phone"
-                    placeholder="Masukan no handphone"
+                    name="recruiter_phone"
+                    id="recruiter_phone"
                     onChange={change}
+                    placeholder="Masukan no handphone"
                     style={{
                       width: "100%",
                       height: 50,
@@ -193,8 +246,8 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
+                    name="recruiter_password"
+                    id="recruiter_password"
                     placeholder="Masukan kata sandi"
                     onChange={change}
                     style={{
@@ -206,28 +259,7 @@ const worker = () => {
                     }}
                   />
                 </div>
-                {/* <div>
-                  <p
-                    style={{
-                      color: "#9ea0a5",
-                      fontSize: 12,
-                      margin: "30px 0 0 0",
-                    }}
-                  >
-                    Konfirmasi kata sandi
-                  </p>
-                  <input
-                    type="password"
-                    placeholder="Masukan konfirmasi kata sandi"
-                    style={{
-                      width: "100%",
-                      height: 50,
-                      borderRadius: 4,
-                      border: "1px solid #e2e5ed",
-                      backgroundColor: "#ffffff",
-                    }}
-                  />
-                </div> */}
+
                 <button
                   onClick={submit}
                   style={{
@@ -266,4 +298,4 @@ const worker = () => {
   );
 };
 
-export default worker;
+export default recruiter;

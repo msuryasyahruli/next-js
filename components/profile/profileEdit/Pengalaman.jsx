@@ -3,6 +3,19 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ModalUpdate from "../../modal exp/modalUpdate";
 import ModalDelete from "../../modal exp/modalDelete";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const Pengalaman = () => {
   // get all exp
@@ -10,9 +23,9 @@ const Pengalaman = () => {
   const [exp, setExp] = useState([]);
   useEffect(() => {
     if (router.isReady) {
-      const islogin = localStorage.getItem("worker_id");
+      const islogin = localStorage.getItem("user_id");
       axios
-        .get(`http://localhost:2525/exp/${islogin}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/exp/${islogin}`)
         .then((res) => {
           setExp(res.data.data);
           // console.log(res.data.data);
@@ -21,15 +34,17 @@ const Pengalaman = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   //login
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
-      const isLogin = localStorage.getItem("worker_id");
+      const isLogin = localStorage.getItem("user_id");
       setLogin(isLogin);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // create exp
@@ -48,18 +63,22 @@ const Pengalaman = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:2525/exp", data)
+      .post(`${process.env.NEXT_PUBLIC_API}/exp`, data)
       .then((res) => {
-        console.log(res);
-        alert("created");
-        // setShow(false);
-        window.location.reload();
+        // console.log(res);
+        Toast.fire({
+          icon: "success",
+          title: "Experience created",
+        });
+        setTimeout(function () {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);

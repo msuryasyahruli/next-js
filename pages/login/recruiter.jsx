@@ -8,12 +8,10 @@ import style from "./login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const worker = () => {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
+const recruiter = () => {
+   const [data, setData] = useState({
+    recruiter_email: "",
+    recruiter_password: "",
   });
 
   const change = (e) => {
@@ -23,17 +21,21 @@ const worker = () => {
     });
     // console.log(data);
   };
-
-  const router = useRouter();
+  
+  const router = useRouter()
 
   const submit = (e) => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_API}/worker/register`, data)
+      .post(`${process.env.NEXT_PUBLIC_API}/recruiter/login`, data)
       .then((res) => {
-        alert("Register success");
-        router.push("/login/worker");
+        localStorage.setItem("token",res.data.data.token);
+        localStorage.setItem("user_id",res.data.data.recruiter_id);
+        localStorage.setItem("role",res.data.data.role);
+        alert("Login success");
+        router.push("/landingPage");
       })
       .catch((err) => {
+        alert("Account doesn't exist")
         console.log(err);
       });
   };
@@ -97,7 +99,7 @@ const worker = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                padding: 10,
+                margin: 10,
               }}
             >
               <div>
@@ -114,64 +116,15 @@ const worker = () => {
                       margin: "30px 0 0 0",
                     }}
                   >
-                    Nama
-                  </p>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Masukan nama panjang"
-                    onChange={change}
-                    style={{
-                      width: "100%",
-                      height: 50,
-                      borderRadius: 4,
-                      border: "1px solid #e2e5ed",
-                      backgroundColor: "#ffffff",
-                    }}
-                  />
-                </div>
-                <div>
-                  <p
-                    style={{
-                      color: "#9ea0a5",
-                      fontSize: 12,
-                      margin: "30px 0 0 0",
-                    }}
-                  >
                     Email
                   </p>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
+                    name="recruiter_email"
+                    id="recruiter_email"
+                    onChange={change}
+                    required
                     placeholder="Masukan alamat email"
-                    onChange={change}
-                    style={{
-                      width: "100%",
-                      height: 50,
-                      borderRadius: 4,
-                      border: "1px solid #e2e5ed",
-                      backgroundColor: "#ffffff",
-                    }}
-                  />
-                </div>
-                <div>
-                  <p
-                    style={{
-                      color: "#9ea0a5",
-                      fontSize: 12,
-                      margin: "30px 0 0 0",
-                    }}
-                  >
-                    No handphone
-                  </p>
-                  <input
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    placeholder="Masukan no handphone"
-                    onChange={change}
                     style={{
                       width: "100%",
                       height: 50,
@@ -193,10 +146,11 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Masukan kata sandi"
+                    name="recruiter_password"
+                    id="recruiter_password"
                     onChange={change}
+                    required
+                    placeholder="Masukan kata sandi"
                     style={{
                       width: "100%",
                       height: 50,
@@ -206,32 +160,22 @@ const worker = () => {
                     }}
                   />
                 </div>
-                {/* <div>
-                  <p
-                    style={{
-                      color: "#9ea0a5",
-                      fontSize: 12,
-                      margin: "30px 0 0 0",
-                    }}
-                  >
-                    Konfirmasi kata sandi
-                  </p>
-                  <input
-                    type="password"
-                    placeholder="Masukan konfirmasi kata sandi"
-                    style={{
-                      width: "100%",
-                      height: 50,
-                      borderRadius: 4,
-                      border: "1px solid #e2e5ed",
-                      backgroundColor: "#ffffff",
-                    }}
-                  />
-                </div> */}
+                <a
+                  href=""
+                  style={{
+                    display: "flex",
+                    justifyContent: "end",
+                    fontWeight: 400,
+                    fontSize: 16,
+                    margin: 10,
+                    color: "#1f2a36",
+                  }}
+                >
+                  Lupa kata sandi?
+                </a>
                 <button
                   onClick={submit}
                   style={{
-                    marginTop: 50,
                     width: "100%",
                     height: 50,
                     borderRadius: 4,
@@ -240,7 +184,7 @@ const worker = () => {
                     color: "white",
                   }}
                 >
-                  Daftar
+                  Masuk
                 </button>
                 <p
                   style={{
@@ -249,11 +193,11 @@ const worker = () => {
                     margin: 20,
                   }}
                 >
-                  Anda sudah punya akun?
+                  Anda belum punya akun?
                   <span>
-                    <Link style={{ color: "#fbb017" }} href="/login/worker">
+                    <Link style={{ color: "#fbb017" }} href="/register/recruiter">
                       {" "}
-                      Masuk disini
+                      Daftar disini
                     </Link>
                   </span>
                 </p>
@@ -266,4 +210,4 @@ const worker = () => {
   );
 };
 
-export default worker;
+export default recruiter;

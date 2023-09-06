@@ -9,27 +9,28 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const worker = () => {
-  let [data, setData] = useState({
+  const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  let change = (e) => {
+  const change = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
   
-  let router = useRouter()
+  const router = useRouter()
 
-  let submit = (e) => {
+  const submit = (e) => {
     axios
-      .post(`http://localhost:2525/worker/login`, data)
+      .post(`${process.env.NEXT_PUBLIC_API}/worker/login`, data)
       .then((res) => {
         localStorage.setItem("token",res.data.data.token);
-        localStorage.setItem("worker_id",res.data.data.worker_id);
+        localStorage.setItem("user_id",res.data.data.worker_id);
+        localStorage.setItem("role",res.data.data.worker_role);
         alert("Login success");
         router.push("/landingPage");
       })

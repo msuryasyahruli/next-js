@@ -12,9 +12,9 @@ const Portofolio = () => {
   const [portfolio, setPortfolio] = useState([]);
   useEffect(() => {
     if (router.isReady) {
-      const islogin = localStorage.getItem("worker_id");
+      const islogin = localStorage.getItem("user_id");
       axios
-        .get(`http://localhost:2525/portfolio/${islogin}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/portfolio/${islogin}`)
         .then((res) => {
           setPortfolio(res.data.data);
           // console.log(res.data.data);
@@ -23,15 +23,17 @@ const Portofolio = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   //login
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
-      const login = localStorage.getItem("worker_id");
+      const login = localStorage.getItem("user_id");
       setLogin(login);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // create portofolio
@@ -47,7 +49,7 @@ const Portofolio = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const [photo, setPhoto] = useState(null);
@@ -59,7 +61,7 @@ const Portofolio = () => {
 
   const handleUpload = (e) => {
     const file = e.target.files;
-    console.log(file);
+    // console.log(file);
     setPhoto(e.target.files[0]);
   };
 
@@ -72,7 +74,7 @@ const Portofolio = () => {
     formData.append("photo", photo);
     formData.append("workerid", data.workerid);
     axios
-      .post("http://localhost:2525/portfolio", formData, {
+      .post(`${process.env.NEXT_PUBLIC_API}/portfolio`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -123,7 +125,7 @@ const Portofolio = () => {
                   link_repo={portfolio.link_repo}
                   tipe={portfolio.tipe}
                 >
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </ModalUpdate>
                 <ModalDelete portfolio_id={portfolio.portfolio_id}><i class="bi bi-trash"></i></ModalDelete>
               </div>
@@ -249,10 +251,10 @@ const Portofolio = () => {
                 {/* {Image ? (
                   <img src={URL.createObjectURL(Image)} alt="img" />
                 ) : ( */}
-                  <Image src={upload} alt="uploadImg" />
+                  <Image src={upload} alt="uploadImg" height={100} width={100} />
                 {/* )} */}
                 <input className="border" type="file" ref={inputRef} name="photo"
-                  onChange={handleUpload} style={{ display: "none" }} />
+                  onChange={handleUpload} style={{ display: "" }} />
               </div>
             </div>
             <div>

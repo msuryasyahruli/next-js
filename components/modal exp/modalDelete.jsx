@@ -1,8 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-// import { useDispatch } from "react-redux";
-// import { deleteExpAction } from "../../config/redux/actions/expAction";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 function ModalDelete({exp_id,children}) {
   // const dispatch = useDispatch()
@@ -13,16 +24,22 @@ function ModalDelete({exp_id,children}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:2525/exp/${exp_id}`, {
+      .delete(`${process.env.NEXT_PUBLIC_API}/exp/${exp_id}`, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        console.log(res);
-        alert("experience deleted");
+        // console.log(res);
+        Toast.fire({
+          icon: "success",
+          title: "Experience created",
+        });
+        setTimeout(function () {
+          window.location.reload();
+        }, 1000);
         setShow(false);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);

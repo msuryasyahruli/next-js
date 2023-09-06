@@ -1,41 +1,36 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import ModalDelete from "../../modal skill/modalDelete";
-import Swal from "sweetalert2";
+// import ModalDelete from "../../modal skill/modalDelete";
+// import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { createSkill, deleteSkill, getSkillUser } from "../../../config/redux/actions/skill";
 
 const Skill = () => {
   // get all skill
   const router = useRouter();
-  const [skill, setSkill] = useState([]);
+  const dispatch = useDispatch();
+  const { skillUser } = useSelector((state) => state.skill);
   useEffect(() => {
-    if (router.isReady) {
-      const islogin = localStorage.getItem("worker_id");
-      axios
-        .get(`http://localhost:2525/skill/${islogin}`)
-        .then((res) => {
-          setSkill(res.data.data);
-          // console.log(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [router.isReady]);
+    const login = localStorage.getItem("user_id");
+    dispatch(getSkillUser(login));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //login
   const [login, setLogin] = useState();
   useEffect(() => {
     if (router.isReady) {
-      const login = localStorage.getItem("worker_id");
+      const login = localStorage.getItem("user_id");
       setLogin(login);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
-  // create exp
+  // create skill
   const [data, setData] = useState({
     skill_name: "",
-    workerid: ""
+    workerid: "",
   });
 
   const handleChange = (e) => {
@@ -43,42 +38,28 @@ const Skill = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
+    console.log(data);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:2525/skill", data)
-      .then((res) => {
-        console.log(res);
-        alert("Created");
-        // Swal.fire(
-        //   'Created!',
-        //   'success'
-        // )
-        // setShow(false);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-        // setShow(false);
-      });
+    dispatch(createSkill(data));
   };
 
   //delete
   const handleDeleteSkill = (skill_id) => {
-    const deleteSkills = skill.filter((s) => s.skill_id !== skill_id);
-    setSkill(deleteSkills);
-    axios.delete(`http://localhost:2525/skill/${skill_id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(deleteSkill(skill_id));
   };
+  // const handleDeleteSkill = (skill_id) => {
+  //   const deleteSkills = skill.filter((s) => s.skill_id !== skill_id);
+  //   setSkill(deleteSkills);
+  //   axios.delete(`${process.env.NEXT_PUBLIC_API}/skill/${skill_id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <div>
@@ -91,7 +72,7 @@ const Skill = () => {
         </div>
         <hr />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {skill.map((skill) => (
+          {skillUser.map((skill) => (
             <div className="row m-0 p-0">
               <div
                 className="border-0 ml-2 mb-3"
@@ -106,18 +87,14 @@ const Skill = () => {
                 }}
               >
                 {skill.skill_name}
-                {/* <button className="onclick">x</button> */}
                 <button
                   className="btn"
-                  style={{ borderRadius: '50%', padding: 5 }}
+                  style={{ borderRadius: "50%", padding: 5 }}
                   onClick={() => handleDeleteSkill(skill.skill_id)}
                 >
-                  <i class="bi bi-x-lg"></i>
+                  <i className="bi bi-trash"></i>
                 </button>
               </div>
-              {/* <div>
-                <ModalDelete skill_id={skill.skill_id}></ModalDelete>
-              </div> */}
             </div>
           ))}
         </div>
@@ -148,7 +125,7 @@ const Skill = () => {
                   height: 50,
                   borderRadius: 4,
                   border: 0,
-                  color: "white"
+                  color: "white",
                 }}
               >
                 Simpan

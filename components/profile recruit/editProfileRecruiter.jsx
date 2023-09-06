@@ -1,24 +1,20 @@
-import Image from "next/image";
-import React, { useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import profile from "./imgProfile/profile.png";
 import map from "./imgEditProfile/map-pin.png";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
+import Image from "next/image";
 import DataDiri from "./profileEdit/DataDiri";
-import Skill from "./profileEdit/skill";
-import Pengalaman from "./profileEdit/Pengalaman";
-import Portofolio from "./profileEdit/Portofolio";
 
-const EditProfile = () => {
+const EditProfileRecruiter = () => {
   const router = useRouter();
-  const [worker, setWorker] = useState([]);
+  const [recruiter, setRecruiter] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API}/worker/${router.query.id}`)
+        .get(`${process.env.NEXT_PUBLIC_API}/recruiter/${router.query.id}`)
         .then((res) => {
-          setWorker(res.data.data[0]);
+          setRecruiter(res.data.data[0]);
         })
         .catch((err) => {
           console.log(err);
@@ -27,7 +23,7 @@ const EditProfile = () => {
   }, [router.isReady]);
 
   return (
-    <div>
+    <>
       <main style={{ backgroundColor: "#f6f7f8" }}>
         <section
           style={{
@@ -46,11 +42,21 @@ const EditProfile = () => {
                     style={{ display: "flex", justifyContent: "center" }}
                   >
                     <div style={{ width: "150px", height: "150px" }}>
-                        <Image src={profile} alt="profile" style={{ width: "100%", height: "100%", borderRadius: "100%" }} />
-                      </div>
+                      <Image
+                        src={profile}
+                        alt="profile"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "100%",
+                        }}
+                      />
+                    </div>
                   </div>
-                  <p style={{ fontSize: 22, fontWeight: 600 }}>{worker.worker_name}</p>
-                  <p>{worker.worker_jobdesk}</p>
+                  <p style={{ fontSize: 22, fontWeight: 600 }}>
+                    {recruiter.company_name}
+                  </p>
+                  <p>{recruiter.worker_jobdesk}</p>
                   <div style={{ display: "flex" }}>
                     <div className="mr-2">
                       <Image src={map} alt="map" />
@@ -62,13 +68,13 @@ const EditProfile = () => {
                         fontWeight: 400,
                       }}
                     >
-                      {worker.worker_city}, {worker.worker_province}
+                      {recruiter.recruiter_city}, {recruiter.recruiter_province}
                     </p>
                   </div>
                   <p
                     style={{ color: "#9ea0a5", fontSize: 14, fontWeight: 400 }}
                   >
-                    {worker.worker_workplace}
+                    {recruiter.company_field}
                   </p>
                 </div>
                 <button
@@ -96,16 +102,13 @@ const EditProfile = () => {
               </section>
               <section className="col-lg-8 pt-3 pt-lg-0">
                 <DataDiri />
-                <Skill />
-                <Pengalaman />
-                <Portofolio />
               </section>
             </div>
           </div>
         </section>
       </main>
-    </div>
+    </>
   );
 };
 
-export default EditProfile;
+export default EditProfileRecruiter;

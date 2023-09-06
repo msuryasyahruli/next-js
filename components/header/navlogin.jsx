@@ -52,7 +52,7 @@ const Navlogin = () => {
         <div className="container">
           <nav className="navbar navbar-expand-md navbar-light row" style={{padding: '25px 15px'}}>
             <div>
-              <Image src={logo} />
+              <Image src={logo} alt="logo" />
             </div>
             <button
               className="navbar-toggler"

@@ -14,7 +14,7 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    const isLogin = localStorage.getItem("worker_id");
+    const isLogin = localStorage.getItem("user_id");
     setLogin(isLogin);
   }, []);
 

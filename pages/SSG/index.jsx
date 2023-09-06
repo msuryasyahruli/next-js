@@ -8,7 +8,7 @@ import Skill from "../../components/Skill/Skill";
 import Pagination from "../../components/pagination/pagination";
 
 export async function getStaticProps() {
-  const res = await axios.get(`http://localhost:2525/worker`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API}`);
   return {
     props: { worker: res.data.data },
   };

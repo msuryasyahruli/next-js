@@ -32,7 +32,7 @@ function ModalUpdate({
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:2525/portfolio/${portfolio_id}`, data)
+      .put(`${process.env.NEXT_PUBLIC_API}/portfolio/${portfolio_id}`, data)
       .then((res) => {
         setData(res.data.data[0]);
         // console.log(res.data.data[0]);
