@@ -10,8 +10,8 @@ import { useRouter } from "next/router";
 
 const worker = () => {
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    worker_email: "",
+    worker_password: "",
   });
 
   const change = (e) => {
@@ -119,8 +119,8 @@ const worker = () => {
                   </p>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
+                    name="worker_email"
+                    id="worker_email"
                     onChange={change}
                     required
                     placeholder="Masukan alamat email"
@@ -145,8 +145,8 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
+                    name="worker_password"
+                    id="worker_password"
                     onChange={change}
                     required
                     placeholder="Masukan kata sandi"

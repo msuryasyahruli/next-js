@@ -216,7 +216,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
-                    <Link href={`/profile/${worker.worker_id}`}>
+                    <Link href={`/profile-view/${worker.worker_id}`}>
                       <button
                         style={{
                           width: 148,

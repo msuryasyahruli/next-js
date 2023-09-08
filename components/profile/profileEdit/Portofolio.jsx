@@ -41,7 +41,7 @@ const Portofolio = () => {
     app_name: "",
     link_repo: "",
     tipe: "",
-    workerid: ""
+    workerid: "",
   });
 
   const handleChange = (e) => {
@@ -54,15 +54,16 @@ const Portofolio = () => {
 
   const [photo, setPhoto] = useState(null);
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
   const handleImgClink = () => {
-    inputRef.current.click()
-  }
+    inputRef.current.click();
+  };
 
+  const [preview, setPreview] = useState(null);
   const handleUpload = (e) => {
-    const file = e.target.files;
-    // console.log(file);
-    setPhoto(e.target.files[0]);
+    const img = e.target.files[0];
+    setPhoto(img);
+    setPreview(URL.createObjectURL(img));
   };
 
   const handleSubmit = (e) => {
@@ -114,7 +115,9 @@ const Portofolio = () => {
                 />
               </div>
               <div className="col-md-6">
-                <p className="mt-2 p-0" style={{ fontWeight: 600 }}>{portfolio.app_name}</p>
+                <p className="mt-2 p-0" style={{ fontWeight: 600 }}>
+                  {portfolio.app_name}
+                </p>
                 <p className="m-0 p-0">{portfolio.link_repo}</p>
                 <p className="mb-3 p-0">{portfolio.tipe}</p>
               </div>
@@ -127,7 +130,9 @@ const Portofolio = () => {
                 >
                   <i className="bi bi-pencil-square"></i>
                 </ModalUpdate>
-                <ModalDelete portfolio_id={portfolio.portfolio_id}><i class="bi bi-trash"></i></ModalDelete>
+                <ModalDelete portfolio_id={portfolio.portfolio_id}>
+                  <i class="bi bi-trash"></i>
+                </ModalDelete>
               </div>
             </div>
             <hr />
@@ -202,9 +207,13 @@ const Portofolio = () => {
                     border: "1px solid #e2e5ed",
                   }}
                 >
-                  <input type="radio" defaultValue="mobile" value={'Aplikasi Mobile'}
+                  <input
+                    type="radio"
+                    defaultValue="mobile"
+                    value={"Aplikasi Mobile"}
                     onChange={handleChange}
-                    name="tipe" />
+                    name="tipe"
+                  />
                   <label htmlFor="mobile">Aplikasi Mobile</label>
                   <br />
                 </div>
@@ -216,9 +225,13 @@ const Portofolio = () => {
                     border: "1px solid #e2e5ed",
                   }}
                 >
-                  <input type="radio" defaultValue="web" value={'Aplikasi Web'}
+                  <input
+                    type="radio"
+                    defaultValue="web"
+                    value={"Aplikasi Web"}
                     onChange={handleChange}
-                    name="tipe" />
+                    name="tipe"
+                  />
                   <label htmlFor="web">Aplikasi Web</label>
                   <br />
                 </div>
@@ -248,13 +261,25 @@ const Portofolio = () => {
               }}
             >
               <div onClick={handleImgClink}>
-                {/* {Image ? (
-                  <img src={URL.createObjectURL(Image)} alt="img" />
-                ) : ( */}
-                  <Image src={upload} alt="uploadImg" height={100} width={100} />
-                {/* )} */}
-                <input className="border" type="file" ref={inputRef} name="photo"
-                  onChange={handleUpload} style={{ display: "" }} />
+                {preview ? (
+                  <Image
+                    src={preview}
+                    alt="avatar"
+                    height={270}
+                    width={480}
+                    className="m-auto my-3"
+                  />
+                ) : (
+                  <Image src={upload} alt="uploadImg" />
+                )}
+                <input
+                  className="border"
+                  type="file"
+                  ref={inputRef}
+                  name="photo"
+                  onChange={handleUpload}
+                  style={{ display: "none" }}
+                />
               </div>
             </div>
             <div>

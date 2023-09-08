@@ -6,7 +6,7 @@ const Skill = () => {
   let [skill, setSkill] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:2525/skill`)
+      .get(`${process.env.NEXT_PUBLIC_API}/skill`)
       .then((res) => {
         setSkill(res.data.data);
         // console.log(res.data.data);

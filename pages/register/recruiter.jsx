@@ -23,7 +23,7 @@ const recruiter = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const router = useRouter();
