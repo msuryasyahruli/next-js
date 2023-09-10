@@ -1,34 +1,168 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br />
+<p align="center">
+  <div align="center">
+    <img height="150" src="https://cdn.discordapp.com/attachments/1118733891738554480/1147830303457550416/Screenshot_120-removebg-preview.png" alt="blanja" border="0"/>
+  </div>
+  <h3 align="center">Peworld</h3>
+  <p align="center">
+    <a href="https://github.com/msuryasyahruli/peworld-web"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="">View Demo</a>
+    ·
+    <a href="">Api Demo</a>
+  </p>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
+- [Contact](#contact)
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+Peworld is a jobseeker website project that aims to assist Software Developers in finding jobs that match their skills.
+
+On this website, job seekers can create a profile, upload their experience and portfolio. Peworld also offers a feature to connect job seekers with companies that are looking for candidates with the required skills.
+
+One of the outstanding features of Peworld is the ability to identify the skills and interests of job seekers based on their abilities. With this information, recruiters can directly connect through the hire feature.
+
+<!-- GETTING STARTED -->
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
+This is an example of how to list things you need to use the software and how to install them.
+
+- [Node.Js](https://nodejs.org/en/download/)
+- [Bootstrap Css](https://getbootstrap.com/)
+- [NextJS](https://nextjs.org/)
+- [Redux](https://redux.js.org/)
+
+### Installation
+
+- Clone This Front End Repo
+
+```
+git clone https://github.com/msuryasyahruli/peworld-web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Go To Folder Repo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+cd peworld-web
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Install Module
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm install
+```
 
-## Learn More
+- <a href="#setup-env">Setup .env</a>
+- Type ` npm run start` To Start Website
+- Type ` npm run production` To Start Production
 
-To learn more about Next.js, take a look at the following resources:
+### Setup .env
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create .env file in your root project folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+NEXT_PUBLIC_API = [BACKEND_URL]
+```
 
-## Deploy on Vercel
+<!-- ROADMAP -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<table>
+ <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Register as </td>
+    <td>Register as </td>
+  </tr>
+  <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Login as </td>
+    <td>Login as </td>
+  </tr>
+   <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Home</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Profile as </td>
+    <td>Profile as </td>
+  </tr>
+   <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td> </td>
+    <td> </td>
+  </tr>
+   <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Related Project
+
+:rocket: [`Backend Peworld`]()
+
+:rocket: [`Frontend Peworld`]()
+
+:rocket: [`Demo Peworld`]()
+Project Link: [https://github.com/msuryasyahruli/peworld-web](https://github.com/msuryasyahruli/peworld-web)
