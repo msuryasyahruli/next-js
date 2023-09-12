@@ -6,13 +6,16 @@ import EditProfileRecruiter from "../../../components/profile recruit/editProfil
 import NavHire from "../../../components/header/navHire";
 
 const edit = () => {
-  const [role, setRole] = useState();
+  const [role, setRole] =
+    useState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const isRole = localStorage.getItem("role");
     setRole(isRole);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (role === 'worker') {
+  if (role === "worker") {
     return (
       <>
         <Nav />

@@ -29,6 +29,7 @@ const recruiter = () => {
     recruiter_password: "",
     company_name: "",
     recruiter_position: "",
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const change = (e) => {
@@ -39,7 +40,9 @@ const recruiter = () => {
     // console.log(data);
   };
 
-  const router = useRouter();
+  const router =
+    useRouter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const submit = (e) => {
     axios

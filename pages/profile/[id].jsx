@@ -7,18 +7,24 @@ import ProfileRecruiter from "../../components/profile recruit/profileRecruiter"
 import NavHire from "../../components/header/navHire";
 
 const index = () => {
-  const [login, setLogin] = useState();
+  const [login, setLogin] =
+    useState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const login = localStorage.getItem("token");
     setLogin(login);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  const [role, setRole] = useState();
+
+  const [role, setRole] =
+    useState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const isRole = localStorage.getItem("role");
     setRole(isRole);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   if (!login) {
     return (
       <>

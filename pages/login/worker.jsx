@@ -25,6 +25,7 @@ const worker = () => {
   const [data, setData] = useState({
     worker_email: "",
     worker_password: "",
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const change = (e) => {
@@ -36,6 +37,7 @@ const worker = () => {
   };
 
   const router = useRouter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const submit = (e) => {
     axios

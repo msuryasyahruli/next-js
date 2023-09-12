@@ -14,13 +14,15 @@ const Skill = () => {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       <div className="d-flex">
-        {skill.map((skill) => (
+        {skill.map((skill, index) => (
           <div
+            key={index}
             className="border-0 mr-2"
             style={{
               width: "auto",
