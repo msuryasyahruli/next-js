@@ -3,6 +3,7 @@ import EditProfile from "../../../components/profile/editProfile";
 import Nav from "../../../components/header/nav";
 import Footer from "../../../components/footer/footer";
 import EditProfileRecruiter from "../../../components/profile recruit/editProfileRecruiter";
+import NavHire from "../../../components/header/navHire";
 
 const edit = () => {
   const [role, setRole] = useState();
@@ -22,7 +23,7 @@ const edit = () => {
   } else {
     return (
       <>
-        <Nav />
+        <NavHire />
         <EditProfileRecruiter />
         <Footer />
       </>

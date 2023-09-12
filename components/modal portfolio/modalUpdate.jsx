@@ -4,13 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 // import { updateExpAction } from "../../config/redux/actions/expAction";
 // import { useDispatch } from "react-redux";
 
-function ModalUpdate({
-  portfolio_id,
-  app_name,
-  link_repo,
-  tipe,
-  children,
-}) {
+function ModalUpdate({ portfolio_id, app_name, link_repo, tipe, children }) {
   // const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -26,7 +20,7 @@ function ModalUpdate({
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleSubmit = (e) => {
@@ -46,7 +40,6 @@ function ModalUpdate({
         setShow(false);
       });
   };
-
 
   return (
     <div>

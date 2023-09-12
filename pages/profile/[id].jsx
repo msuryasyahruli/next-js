@@ -4,6 +4,7 @@ import Nav from "../../components/header/nav";
 import Footer from "../../components/footer/footer";
 import Navlogin from "../../components/header/navlogin";
 import ProfileRecruiter from "../../components/profile recruit/profileRecruiter";
+import NavHire from "../../components/header/navHire";
 
 const index = () => {
   const [login, setLogin] = useState();
@@ -34,10 +35,10 @@ const index = () => {
         <Footer />
       </>
     );
-  } {
+  } else {
     return (
       <>
-        <Nav />
+        <NavHire />
         <ProfileRecruiter />
         <Footer />
       </>

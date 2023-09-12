@@ -8,11 +8,11 @@ const DataDiri = () => {
     company_name:"",
     recruiter_province: "",
     recruiter_city: "",
+    recruiter_email:"",
     company_email: "",
     company_field: "",
     company_phone: "",
     company_info: "",
-    recruiter_email:"",
   });
 
   const handleChange = (e) => {
@@ -40,7 +40,6 @@ const DataDiri = () => {
   };
 
   const router = useRouter();
-  // const [recruiter, setRecruiter] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios

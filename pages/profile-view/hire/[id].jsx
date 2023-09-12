@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Navlogin from "../../components/header/navlogin";
-import Profile from "../../components/profile/profile";
-import Footer from "../../components/footer/footer";
-import Nav from "../../components/header/nav";
-import NavHire from "../../components/header/navHire";
-import ProfileViewer from "../../components/profile viewer/profileViewer";
+import Navlogin from "../../../components/header/navlogin";
+// import Profile from "../../components/profile/profile";
+import Footer from "../../../components/footer/footer";
+import Nav from "../../../components/header/nav";
+import NavHire from "../../../components/header/navHire";
+import Hire from "../../../components/profile viewer/hire/Hire";
 
 const index = () => {
   const [login, setLogin] = useState();
@@ -23,7 +23,7 @@ const index = () => {
     return (
       <>
         <Navlogin />
-        <Profile />
+        <Hire />
         <Footer />
       </>
     );
@@ -31,7 +31,7 @@ const index = () => {
     return (
       <>
         <Nav />
-        <Profile />
+        <Hire />
         <Footer />
       </>
     );
@@ -39,7 +39,7 @@ const index = () => {
     return (
       <>
         <NavHire />
-        <ProfileViewer />
+        <Hire />
         <Footer />
       </>
     );

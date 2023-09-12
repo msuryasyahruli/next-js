@@ -6,38 +6,23 @@ import mail from "./imgNav/mail.png";
 // import Profile from "./imgNav/profile.png";
 import Profile2 from "./imgNav/profile (2).png";
 // import { useRouter } from "next/router";
-import axios from "axios";
+// import axios from "axios";
 
-const Nav = () => {
+const NavHire = () => {
   const [login, setLogin] = useState();
-
-  const isLogout = () => {
-    localStorage.clear();
-    setTimeout(function () {
-      window.location.reload();
-    }, 1000);
-  };
 
   useEffect(() => {
     const isLogin = localStorage.getItem("user_id");
     setLogin(isLogin);
   }, []);
 
-  // const router = useRouter();
-  const [worker, setWorker] = useState([]);
-  useEffect(() => {
-    // if () {
-    const user = localStorage.getItem("user_id");
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API}/worker/${user}`)
-      .then((res) => {
-        setWorker(res.data.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // }
-  });
+  const isLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
+  };
 
   return (
     <div>
@@ -73,29 +58,16 @@ const Nav = () => {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    {!worker.worker_photo ? (
-                      <Image
-                        className="ml-3"
-                        src={Profile2}
-                        alt="profile"
-                        width={30}
-                        height={30}
-                        style={{
-                          borderRadius: "100%",
-                        }}
-                      />
-                    ) : (
-                      <Image
-                        className="ml-3"
-                        src={worker.worker_photo}
-                        alt="profile"
-                        width={30}
-                        height={30}
-                        style={{
-                          borderRadius: "100%",
-                        }}
-                      />
-                    )}
+                    <Image
+                      className="ml-3"
+                      src={Profile2}
+                      alt="profile"
+                      width={30}
+                      height={30}
+                      style={{
+                        borderRadius: "100%",
+                      }}
+                    />
                   </a>
                   <div
                     className="dropdown-menu dropdown-menu-right"
@@ -104,12 +76,12 @@ const Nav = () => {
                     <a className="dropdown-item" href={`/profile/${login}`}>
                       Profile
                     </a>
-                    <a
+                    {/* <a
                       className="dropdown-item"
                       href={`/profile/edit/${login}`}
                     >
                       Edit profile
-                    </a>
+                    </a> */}
                     <a
                       className="dropdown-item"
                       href="/landingPage"
@@ -128,4 +100,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavHire;

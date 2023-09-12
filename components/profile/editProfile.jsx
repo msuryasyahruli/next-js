@@ -9,6 +9,7 @@ import DataDiri from "./profileEdit/DataDiri";
 import Skill from "./profileEdit/skill";
 import Pengalaman from "./profileEdit/Pengalaman";
 import Portofolio from "./profileEdit/Portofolio";
+import UploadPhoto from "../modal photo/uploadPhoto";
 
 const EditProfile = () => {
   const router = useRouter();
@@ -42,14 +43,42 @@ const EditProfile = () => {
                   style={{ borderRadius: 8, background: "white", padding: 20 }}
                 >
                   <div
-                    className="pt-3 pb-3"
-                    style={{ display: "flex", justifyContent: "center" }}
+                    className="pt-3 pb-3 justify-content-center d-flex align-items-center"
+                    style={{ flexDirection:"column" }}
                   >
                     <div style={{ width: "150px", height: "150px" }}>
-                        <Image src={profile} alt="profile" style={{ width: "100%", height: "100%", borderRadius: "100%" }} />
-                      </div>
+                      {!worker.worker_photo ? (
+                        <Image
+                          src={profile}
+                          alt="profile"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "100%",
+                          }}
+                        />
+                      ) : (
+                        <Image
+                          src={worker.worker_photo}
+                          alt="profile"
+                          width={100}
+                          height={100}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "100%",
+                          }}
+                        />
+                      )}
+                    </div>
+                    <UploadPhoto
+                      worker_id={worker.worker_id}
+                      photo={worker.worker_photo}
+                    ></UploadPhoto>
                   </div>
-                  <p style={{ fontSize: 22, fontWeight: 600 }}>{worker.worker_name}</p>
+                  <p style={{ fontSize: 22, fontWeight: 600 }}>
+                    {worker.worker_name}
+                  </p>
                   <p>{worker.worker_jobdesk}</p>
                   <div style={{ display: "flex" }}>
                     <div className="mr-2">

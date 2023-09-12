@@ -50,8 +50,8 @@ const Navlogin = () => {
           </div>
         </nav> */}
         <div className="container">
-          <nav className="navbar navbar-expand-md navbar-light row" style={{padding: '25px 15px'}}>
-            <div>
+          <nav className="navbar navbar-expand-md navbar-light row">
+            <div className="col-7 row">
               <Image src={logo} alt="logo" />
             </div>
             <button
@@ -66,34 +66,36 @@ const Navlogin = () => {
               <span className="navbar-toggler-icon" />
             </button>
             <div
-              className="collapse navbar-collapse m-0 row justify-content-md-end justify-content-between"
+              className="collapse navbar-collapse m-0 row"
               id="navbarNav"
             >
-              <div className="mr-2 mr-md-1 pt-3 pt-md-0">
+              <div className="col-6 p-2">
                 <Link href="/login/worker">
                   <button
                     style={{
-                      width: "180px",
+                      width: "100%",
                       height: 44,
                       borderRadius: 5,
                       border: "1px solid #5e50a1",
                       backgroundColor: "transparent",
+                      lineHeight:1
                     }}
                   >
                     Masuk Untuk Pekerja
                   </button>
                 </Link>
               </div>
-              <div className="ml-2 ml-md-1 pt-3 pt-md-0">
+              <div className="col-6 p-2">
                 <Link href="/login/recruiter">
                   <button
                     style={{
-                      width: "180px",
+                      width: "100%",
                       height: 44,
                       borderRadius: 5,
                       border: 0,
                       backgroundColor: "#5e50a1",
                       color: "white",
+                      lineHeight:1
                     }}
                   >
                     Masuk Untuk Perekrut

@@ -201,7 +201,6 @@ const Landing = () => {
             </p>
           </div>
           <div className="container pb-5">
-
             <section
               className="row"
             >
@@ -418,7 +417,7 @@ const Landing = () => {
               <Link href="/home">
                 <button
                   style={{
-                    width: 210,
+                    maxWidth: 210,
                     height: "63px",
                     borderRadius: 5,
                     border: 0,

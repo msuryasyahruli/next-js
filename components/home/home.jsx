@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 // import { useRouter } from "next/router";
 
 const Home = () => {
-  const [sort, setSort] = useState();
+  // const [sort, setSort] = useState();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
@@ -25,31 +25,40 @@ const Home = () => {
       });
   }, []);
 
-  const onSelectionChange = (e) => {
-    const sortDirection = e.target.value;
-    setSort(sortDirection);
-  };
-
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = worker.slice(firstPostIndex, lastPostIndex);
 
   //get skill
-  const router = useRouter();
-  const [skill, setSkill] = useState([]);
-  useEffect(() => {
-    if (router.isReady) {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API}/${router.query.id}`)
-      .then((res) => {
-        setSkill(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  }, [router.isReady]);
+  // const router = useRouter();
+  // const [skill, setSkill] = useState([]);
+  // useEffect(() => {
+  //   if (router.isReady) {
+  //     axios
+  //       .get(`${process.env.NEXT_PUBLIC_API}/skill/${router.query.id}`)
+  //       .then((res) => {
+  //         setSkill(res.data.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }, [router.isReady]);
 
+  // const sortOption = ["worker_name", "worker_city", "worker_jobdesk"];
+
+  const [sortValue, setSortValue] = useState();
+
+  const handleSort = async (e) => {
+    let value = e.target.value;
+    setSortValue(value);
+    return await axios
+      .get(`${process.env.NEXT_PUBLIC_API}/worker?sortby=${value}&&sort=asc`)
+      .then((res) => {
+        setWorker(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <main style={{ backgroundColor: "#f6f7f8" }}>
@@ -88,42 +97,17 @@ const Home = () => {
               onChange={(e) => setSearch(e.target.value)}
               style={{ height: 54 }}
             />
-            {/* <div className="input-group-append" id="button-addon4">
-              <button
-                className="btn dropdown-toggle"
-                type="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sort
-              </button>
-              <div className="dropdown-menu dropdown-menu-right">
-                <a className="dropdown-item" href="#">
-                  Sort by name
-                </a>
-                <a className="dropdown-item" href="#">
-                  Sort by skill
-                </a>
-                <a className="dropdown-item" href="#">
-                  Sort by location
-                </a>
-                <a className="dropdown-item" href="#">
-                  Sort by freelance
-                </a>
-                <a className="dropdown-item" href="#">
-                  Sort by fulltime
-                </a>
-              </div>
-            </div> */}
             <select
-              className="form-select "
-              aria-label="Default select example"
-              onChange={onSelectionChange}
-              style={{ border: 0 }}
+              onChange={handleSort}
+              value={sortValue}
+              style={{ width: 70, height: 54, border: 0 }}
             >
-              <option selected>Sort</option>
-              <option value="asc">A-Z</option>
-              <option value="desc">Z-A</option>
+              <option>Sort</option>
+              {/* {sortOption.map((item, index) => ( */}
+              <option value="worker_name">Name</option>
+              <option value="worker_city">City</option>
+              <option value="worker_jobdesk">Job</option>
+              {/* ))} */}
             </select>
             <button
               className="btn"
@@ -140,51 +124,52 @@ const Home = () => {
           </div>
         </div>
         <div className="container pb-5">
-          {currentPosts
-            .filter((worker) => {
-              return search.toLowerCase() === ""
-                ? worker
-                : worker.worker_name
-                  .toLowerCase()
-                  .includes(search.toLowerCase());
-            })
-            .sort((a, b) => {
-              return sort === "asc"
-                ? a.worker_name.localeCompare(b.worker_name)
-                : b.worker_name.localeCompare(a.worker_name);
-            })
-            .map((worker) => (
-              <div
-                className="p-3"
-                style={{ backgroundColor: "white", borderRadius: 10 }}
-              >
-                <div className="row">
-                  <div className="col-lg-2 col-md-3 d-flex justify-content-center">
-                    <div style={{ width: "120px", height: "120px" }}>
-                      <Image
-                        src={profile1}
-                        alt="profile"
-                        style={{ height: "100%", width: "100%", borderRadius: "100%" }}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-7 col-md-6">
-                    <p style={{ fontSize: 22, fontWeight: 600 }}>
-                      {worker.worker_name}
-                    </p>
-                    <p
-                      style={{
-                        color: "#9ea0a5",
-                        fontSize: 14,
-                        fontWeight: 400,
-                      }}
-                    >
-                      {worker.worker_jobdesk}
-                    </p>
-                    <div style={{ display: "flex" }}>
-                      <div className="pr-2">
-                        <Image src={map} alt="map" />
+          <div
+            className="p-3"
+            style={{ backgroundColor: "white", borderRadius: 10 }}
+          >
+            {currentPosts
+              .filter((worker) => {
+                return search.toLowerCase() === ""
+                  ? worker
+                  : worker.worker_name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+              })
+              .map((worker, index) => (
+                <div key={index}>
+                  <div className="row align-items-center">
+                    <div className="col-lg-2 col-md-3 d-flex justify-content-center align-items-center">
+                      <div style={{ width: "120px", height: "120px" }}>
+                        {!worker.worker_photo ? (
+                          <Image
+                            src={profile1}
+                            alt="profile"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        ) : (
+                          <Image
+                            src={worker.worker_photo}
+                            alt="profile"
+                            width={100}
+                            height={100}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        )}
                       </div>
+                    </div>
+                    <div className="col-lg-7 col-md-6">
+                      <p style={{ fontSize: 22, fontWeight: 600, margin: 0 }}>
+                        {worker.worker_name}
+                      </p>
                       <p
                         style={{
                           color: "#9ea0a5",
@@ -192,49 +177,63 @@ const Home = () => {
                           fontWeight: 400,
                         }}
                       >
-                        {worker.worker_city}, {worker.worker_province}
+                        {worker.worker_jobdesk}
                       </p>
-                    </div>
-                    <div style={{ display: "flex" }}>
-                      {skill.map((skill) => (
-                        <div
-                          className="border-0 mr-2"
+                      <div className="d-flex">
+                        <div className="mr-2">
+                          <Image src={map} alt="map" />
+                        </div>
+                        <p
                           style={{
-                            width: "auto",
-                            padding: "0 10px",
-                            height: 28,
-                            borderRadius: 4,
-                            border: "1px solid #fbb017",
-                            background: "rgba(251, 176, 23, 0.6)",
-                            textAlign: "center",
-                            color: "white",
+                            color: "#9ea0a5",
+                            fontSize: 14,
+                            fontWeight: 400,
                           }}
                         >
-                          {skill.skill_name}
-                        </div>
-                      ))}
+                          {worker.worker_city}, {worker.worker_province}
+                        </p>
+                      </div>
+                      {/* <div className="d-flex">
+                        {skill.map((skill) => (
+                          <div
+                            className="border-0 mr-2"
+                            style={{
+                              width: "auto",
+                              padding: "0 10px",
+                              height: 28,
+                              borderRadius: 4,
+                              border: "1px solid #fbb017",
+                              background: "rgba(251, 176, 23, 0.6)",
+                              textAlign: "center",
+                              color: "white",
+                            }}
+                          >
+                            {skill.skill_name}
+                          </div>
+                        ))}
+                      </div> */}
+                    </div>
+                    <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
+                      <Link href={`/profile-view/${worker.worker_id}`}>
+                        <button
+                          style={{
+                            width: 148,
+                            height: 54,
+                            borderRadius: 4,
+                            background: "#5e50a1",
+                            color: "white",
+                            textAlign: "center",
+                          }}
+                        >
+                          Lihat Profile
+                        </button>
+                      </Link>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
-                    <Link href={`/profile-view/${worker.worker_id}`}>
-                      <button
-                        style={{
-                          width: 148,
-                          height: 54,
-                          borderRadius: 4,
-                          background: "#5e50a1",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        Lihat Profile
-                      </button>
-                    </Link>
-                  </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            ))}
+              ))}
+          </div>
           <Pagination
             totalPosts={worker.length}
             postsPerPage={postsPerPage}

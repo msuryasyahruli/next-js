@@ -10,7 +10,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const ProfileViewer = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   //get worker
   const [worker, setWorker] = useState([]);
@@ -72,6 +72,12 @@ const ProfileViewer = () => {
     }
   }, [router.isReady]);
 
+  const [login, setLogin] = useState();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("user_id");
+    setLogin(isLogin);
+  }, []);
+
   return (
     <>
       <main style={{ backgroundColor: "#F6F7F8" }}>
@@ -97,15 +103,29 @@ const ProfileViewer = () => {
                       style={{ display: "flex", justifyContent: "center" }}
                     >
                       <div style={{ width: "150px", height: "150px" }}>
-                        <Image
-                          src={profile}
-                          alt="profile"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            borderRadius: "100%",
-                          }}
-                        />
+                        {!worker.worker_photo ? (
+                          <Image
+                            src={profile}
+                            alt="profile"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        ) : (
+                          <Image
+                            src={worker.worker_photo}
+                            alt="profile"
+                            width={100}
+                            height={100}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                     <p style={{ fontSize: 22, fontWeight: 600 }}>
@@ -144,26 +164,29 @@ const ProfileViewer = () => {
                     >
                       {worker.worker_description}
                     </p>
-                    <button
-                      style={{
-                        height: 50,
-                        width: "100%",
-                        borderRadius: 4,
-                        border: 0,
-                        color: "white",
-                        background: "#5e50a1",
-                      }}
-                    >
-                      Hire
-                    </button>
+                    <a href={`hire/${worker.worker_id}`}>
+                      <button
+                        style={{
+                          height: 50,
+                          width: "100%",
+                          borderRadius: 4,
+                          border: 0,
+                          color: "white",
+                          background: "#5e50a1",
+                        }}
+                      >
+                        Hire
+                      </button>
+                    </a>
                     <p
                       style={{ fontSize: 22, fontWeight: 600, paddingTop: 20 }}
                     >
                       Skill
                     </p>
                     <div style={{ display: "flex", flexWrap: "wrap" }}>
-                      {skill.map((skill) => (
+                      {skill.map((skill, index) => (
                         <div
+                          key={index}
                           className="border-0 mr-3 mb-3"
                           style={{
                             padding: "3px 10px",
@@ -191,7 +214,7 @@ const ProfileViewer = () => {
                             fontWeight: 400,
                           }}
                         >
-                          Louistommo@gmail.com
+                          {worker.worker_email}
                         </p>
                       </div>
                       <div style={{ display: "flex" }}>
@@ -205,7 +228,7 @@ const ProfileViewer = () => {
                             fontWeight: 400,
                           }}
                         >
-                          @Louist91
+                          @{worker.worker_name}
                         </p>
                       </div>
                       <div style={{ display: "flex" }}>
@@ -219,7 +242,7 @@ const ProfileViewer = () => {
                             fontWeight: 400,
                           }}
                         >
-                          @Louistommo
+                          @{worker.worker_name}
                         </p>
                       </div>
                       <div style={{ display: "flex" }}>
@@ -233,7 +256,7 @@ const ProfileViewer = () => {
                             fontWeight: 400,
                           }}
                         >
-                          @Louistommo91
+                          @{worker.worker_name}
                         </p>
                       </div>
                     </div>
@@ -281,8 +304,9 @@ const ProfileViewer = () => {
                         aria-labelledby="nav-Portofolio-tab"
                       >
                         <div className="row">
-                          {portfolio.map((portfolio) => (
+                          {portfolio.map((portfolio, index) => (
                             <div
+                              key={index}
                               className="col-md-4"
                               style={{ textAlign: "center" }}
                             >
@@ -304,8 +328,8 @@ const ProfileViewer = () => {
                         aria-labelledby="nav-Pengalaman-tab"
                       >
                         <div>
-                          {exp.map((exp) => (
-                            <div>
+                          {exp.map((exp, index) => (
+                            <div key={index}>
                               <div>
                                 <p
                                   className="m-0 p-0"

@@ -7,13 +7,26 @@ import Link from "next/link";
 import style from "./login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 2500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const worker = () => {
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
+    worker_name: "",
+    worker_email: "",
+    worker_phone: "",
+    worker_password: "",
   });
 
   const change = (e) => {
@@ -30,11 +43,20 @@ const worker = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_API}/worker/register`, data)
       .then((res) => {
-        alert("Register success");
-        router.push("/login/worker");
+        Toast.fire({
+          icon: "success",
+          title: res.data.message,
+        });
+        setTimeout(function () {
+          router.push("/login/worker");
+        }, 1000);
       })
       .catch((err) => {
-        console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: err.response.data.message,
+        });
+        // console.log(err);
       });
   };
 
@@ -118,8 +140,8 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
-                    name="name"
-                    id="name"
+                    name="worker_name"
+                    id="worker_name"
                     placeholder="Masukan nama panjang"
                     onChange={change}
                     style={{
@@ -143,8 +165,8 @@ const worker = () => {
                   </p>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
+                    name="worker_email"
+                    id="worker_email"
                     placeholder="Masukan alamat email"
                     onChange={change}
                     style={{
@@ -168,8 +190,8 @@ const worker = () => {
                   </p>
                   <input
                     type="text"
-                    name="phone"
-                    id="phone"
+                    name="worker_phone"
+                    id="worker_phone"
                     placeholder="Masukan no handphone"
                     onChange={change}
                     style={{
@@ -193,8 +215,8 @@ const worker = () => {
                   </p>
                   <input
                     type="password"
-                    name="password"
-                    id="password"
+                    name="worker_password"
+                    id="worker_password"
                     placeholder="Masukan kata sandi"
                     onChange={change}
                     style={{

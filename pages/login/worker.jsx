@@ -7,6 +7,19 @@ import Link from "next/link";
 import style from "./login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 2500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const worker = () => {
   const [data, setData] = useState({
@@ -21,22 +34,36 @@ const worker = () => {
     });
     // console.log(data);
   };
-  
-  const router = useRouter()
+
+  const router = useRouter();
 
   const submit = (e) => {
     axios
       .post(`${process.env.NEXT_PUBLIC_API}/worker/login`, data)
       .then((res) => {
-        localStorage.setItem("token",res.data.data.token);
-        localStorage.setItem("user_id",res.data.data.worker_id);
-        localStorage.setItem("role",res.data.data.worker_role);
-        alert("Login success");
-        router.push("/landingPage");
+        if (res.data.data) {
+          Toast.fire({
+            icon: "success",
+            title: res.data.message,
+          });
+          setTimeout(function () {
+            router.push("/landingPage");
+          }, 1000);
+          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("user_id", res.data.data.worker_id);
+          localStorage.setItem("role", res.data.data.worker_role);
+        } else {
+          Toast.fire({
+            icon: "warning",
+            title: res.data.message,
+          });
+        }
       })
       .catch((err) => {
-        alert("Account doesn't exist")
-        console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: err.response.data.message,
+        });
       });
   };
 
@@ -69,7 +96,8 @@ const worker = () => {
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
-              <div className="d-flex align-items-center"
+              <div
+                className="d-flex align-items-center"
                 style={{
                   height: "100%",
                   position: "absolute",

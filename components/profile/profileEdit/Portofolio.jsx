@@ -5,6 +5,19 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import ModalUpdate from "../../modal portfolio/modalUpdate";
 import ModalDelete from "../../modal portfolio/modalDelete";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const Portofolio = () => {
   // get all portfolio
@@ -81,15 +94,18 @@ const Portofolio = () => {
         },
       })
       .then((res) => {
-        console.log(res);
-        alert("created");
-        // setShow(false);
-        window.location.reload();
+        // console.log(res);
+        Toast.fire({
+          icon: "success",
+          title: "Portfolio created",
+        });
+        setTimeout(function () {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
         alert(err);
-        // setShow(false);
       });
   };
 
@@ -103,8 +119,8 @@ const Portofolio = () => {
           <p style={{ fontWeight: 600, fontSize: 22 }}>Portofolio</p>
         </div>
         <hr />
-        {portfolio.map((portfolio) => (
-          <div>
+        {portfolio.map((portfolio, index) => (
+          <div key={index}>
             <div className="row mb-3 mt-2">
               <div className="col-md-4">
                 <img
@@ -131,7 +147,7 @@ const Portofolio = () => {
                   <i className="bi bi-pencil-square"></i>
                 </ModalUpdate>
                 <ModalDelete portfolio_id={portfolio.portfolio_id}>
-                  <i class="bi bi-trash"></i>
+                  <i className="bi bi-trash"></i>
                 </ModalDelete>
               </div>
             </div>
@@ -265,8 +281,9 @@ const Portofolio = () => {
                   <Image
                     src={preview}
                     alt="avatar"
-                    height={270}
-                    width={480}
+                    height={180}
+                    width={320}
+                    style={{ objectFit: "cover" }}
                     className="m-auto my-3"
                   />
                 ) : (

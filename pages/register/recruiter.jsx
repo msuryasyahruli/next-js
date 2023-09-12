@@ -7,6 +7,19 @@ import Link from "next/link";
 import style from "./login.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 2500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const recruiter = () => {
   const [data, setData] = useState({
@@ -32,11 +45,19 @@ const recruiter = () => {
     axios
       .post(`${process.env.NEXT_PUBLIC_API}/recruiter/register`, data)
       .then((res) => {
-        alert("Register success");
-        router.push("/login/recruiter");
+        Toast.fire({
+          icon: "success",
+          title: res.data.message,
+        });
+        setTimeout(function () {
+          router.push("/login/recruiter");
+        }, 1000);
       })
       .catch((err) => {
-        console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: err.response.data.message,
+        });
       });
   };
 

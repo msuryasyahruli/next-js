@@ -1,6 +1,19 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const DataDiri = (name) => {
   //update profile
@@ -28,7 +41,11 @@ const DataDiri = (name) => {
       .put(`${process.env.NEXT_PUBLIC_API}/worker/${login}`, data)
       .then((res) => {
         setData(res.data.data[0]);
-        alert("Data updated");
+        Toast.fire({
+          icon: "success",
+          title: "Experience created",
+        });
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -43,7 +60,7 @@ const DataDiri = (name) => {
         .get(`${process.env.NEXT_PUBLIC_API}/worker/${router.query.id}`)
         .then((res) => {
           setData(res.data.data[0]);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -54,7 +71,7 @@ const DataDiri = (name) => {
   return (
     <div>
       <div style={{ borderRadius: 8, background: "white", padding: 20 }}>
-        <p style={{ fontWeight: 600, fontSize: 22 }}>Data diri</p>
+        <p style={{ fontWeight: 600, fontSize: 22 }}>Personal data</p>
         <hr />
         <form onSubmit={handleSubmit}>
           <div>

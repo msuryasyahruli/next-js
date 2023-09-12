@@ -72,8 +72,8 @@ const Skill = () => {
         </div>
         <hr />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {skillUser.map((skill) => (
-            <div className="row m-0 p-0">
+          {skillUser.map((skill, index) => (
+            <div className="row m-0 p-0" key={index}>
               <div
                 className="border-0 ml-2 mb-3"
                 style={{

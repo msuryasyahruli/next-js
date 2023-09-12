@@ -95,8 +95,8 @@ const Pengalaman = () => {
       >
         <p style={{ fontWeight: 600, fontSize: 22 }}>Experience</p>
         <hr />
-        {exp.map((exp) => (
-          <div>
+        {exp.map((exp, index) => (
+          <div key={index}>
             <div className="row">
               <div className="col-md-9">
                 <div>
@@ -133,9 +133,9 @@ const Pengalaman = () => {
                   working_end={exp.working_end}
                   description={exp.description}
                 >
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </ModalUpdate>
-                <ModalDelete exp_id={exp.exp_id}><i class="bi bi-trash"></i></ModalDelete>
+                <ModalDelete exp_id={exp.exp_id}><i className="bi bi-trash"></i></ModalDelete>
               </div>
             </div>
             <hr />
