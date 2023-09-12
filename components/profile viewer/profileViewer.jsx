@@ -25,6 +25,7 @@ const ProfileViewer = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all skill
@@ -40,6 +41,7 @@ const ProfileViewer = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all portfolio
@@ -55,6 +57,7 @@ const ProfileViewer = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all exp
@@ -70,12 +73,14 @@ const ProfileViewer = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   const [login, setLogin] = useState();
   useEffect(() => {
     const isLogin = localStorage.getItem("user_id");
     setLogin(isLogin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -310,7 +315,7 @@ const ProfileViewer = () => {
                               className="col-md-4"
                               style={{ textAlign: "center" }}
                             >
-                              <img
+                              <Image
                                 src={portfolio.photo}
                                 alt="app"
                                 crossOrigin="anonymous"

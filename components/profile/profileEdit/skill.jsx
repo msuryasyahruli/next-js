@@ -38,7 +38,8 @@ const Skill = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
+    // console.log(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   const handleSubmit = (e) => {
@@ -49,17 +50,6 @@ const Skill = () => {
   const handleDeleteSkill = (skill_id) => {
     dispatch(deleteSkill(skill_id));
   };
-  // const handleDeleteSkill = (skill_id) => {
-  //   const deleteSkills = skill.filter((s) => s.skill_id !== skill_id);
-  //   setSkill(deleteSkills);
-  //   axios.delete(`${process.env.NEXT_PUBLIC_API}/skill/${skill_id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   return (
     <div>

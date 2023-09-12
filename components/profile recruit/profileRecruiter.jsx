@@ -23,6 +23,7 @@ const ProfileRecruiter = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   const [login, setLogin] = useState();

@@ -105,8 +105,8 @@ function SSR({ worker }) {
                 ? a.worker_name.localeCompare(b.worker_name)
                 : b.worker_name.localeCompare(a.worker_name);
             })
-            .map((worker) => (
-              <div
+            .map((worker, index) => (
+              <div key={index}
                 className="p-3"
                 style={{ backgroundColor: "white", borderRadius: 10 }}
               >

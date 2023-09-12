@@ -5,6 +5,7 @@ import bell from "./imgNav/bell.png";
 import mail from "./imgNav/mail.png";
 // import Profile from "./imgNav/profile.png";
 import Profile2 from "./imgNav/profile (2).png";
+import Link from "next/link";
 // import { useRouter } from "next/router";
 // import axios from "axios";
 
@@ -14,6 +15,7 @@ const NavHire = () => {
   useEffect(() => {
     const isLogin = localStorage.getItem("user_id");
     setLogin(isLogin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isLogout = () => {
@@ -49,9 +51,9 @@ const NavHire = () => {
             <div className="mr-3">
               <ul className="navbar-nav dropdown">
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href=""
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-toggle="dropdown"
@@ -68,27 +70,27 @@ const NavHire = () => {
                         borderRadius: "100%",
                       }}
                     />
-                  </a>
+                  </Link>
                   <div
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="navbarDropdownMenuLink"
                   >
-                    <a className="dropdown-item" href={`/profile/${login}`}>
+                    <Link className="dropdown-item" href={`/profile/${login}`}>
                       Profile
-                    </a>
-                    {/* <a
+                    </Link>
+                    {/* <Link
                       className="dropdown-item"
                       href={`/profile/edit/${login}`}
                     >
                       Edit profile
-                    </a> */}
-                    <a
+                    </Link> */}
+                    <Link
                       className="dropdown-item"
                       href="/landingPage"
                       onClick={isLogout}
                     >
                       Log Out
-                    </a>
+                    </Link>
                   </div>
                 </li>
               </ul>

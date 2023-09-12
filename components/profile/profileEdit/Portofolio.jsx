@@ -123,7 +123,7 @@ const Portofolio = () => {
           <div key={index}>
             <div className="row mb-3 mt-2">
               <div className="col-md-4">
-                <img
+                <Image
                   src={portfolio.photo}
                   alt="app"
                   crossOrigin="anonymous"

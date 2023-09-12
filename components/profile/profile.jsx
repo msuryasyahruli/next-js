@@ -25,6 +25,7 @@ const Profile = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all skill
@@ -40,6 +41,7 @@ const Profile = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all portfolio
@@ -55,6 +57,7 @@ const Profile = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // get all exp
@@ -70,6 +73,7 @@ const Profile = () => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   const [login, setLogin] = useState();
@@ -310,7 +314,7 @@ const Profile = () => {
                               className="col-md-4"
                               style={{ textAlign: "center" }}
                             >
-                              <img
+                              <Image
                                 src={portfolio.photo}
                                 alt="app"
                                 crossOrigin="anonymous"

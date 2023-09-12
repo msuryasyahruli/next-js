@@ -66,6 +66,7 @@ const DataDiri = (name) => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   return (

@@ -9,7 +9,7 @@
     <br />
     <a href="">View Demo</a>
     ·
-    <a href="">Api Demo</a>
+    <a href="https://backend-peworld.vercel.app/">Api Demo</a>
   </p>
 </p>
 
@@ -160,9 +160,9 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Peworld`]()
+:rocket: [`Backend Peworld`](https://github.com/msuryasyahruli/backend-peworld-web)
 
-:rocket: [`Frontend Peworld`]()
+:rocket: [`Frontend Peworld`](https://github.com/msuryasyahruli/peworld-web)
 
 :rocket: [`Demo Peworld`]()
 Project Link: [https://github.com/msuryasyahruli/peworld-web](https://github.com/msuryasyahruli/peworld-web)
