@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import profile1 from "../../components/home/imgHome/profile1.png";
 import map from "../../components/home/imgHome/map-pin.png";
-import Skill from "../../components/Skill/Skill";
 import Pagination from "../../components/pagination/pagination";
 
 export async function getServerSideProps() {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API}`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/worker`);
   return {
     props: { worker: res.data.data },
   };
@@ -67,16 +66,16 @@ function SSR({ worker }) {
               onChange={(e) => setSearch(e.target.value)}
               style={{ height: 54 }}
             />
-            <select
-              className="form-select "
-              aria-label="Default select example"
-              onChange={onSelectionChange}
-              style={{ border: 0 }}
+            {/* <select
+              onChange={handleSort}
+              value={sortValue}
+              style={{ width: 70, height: 54, border: 0 }}
             >
-              <option selected>Sort</option>
-              <option value="asc">A-Z</option>
-              <option value="desc">Z-A</option>
-            </select>
+              <option>Sort</option>
+              <option value="worker_name">Name</option>
+              <option value="worker_city">City</option>
+              <option value="worker_jobdesk">Job</option>
+            </select> */}
             <button
               className="btn"
               type="button"
@@ -92,52 +91,52 @@ function SSR({ worker }) {
           </div>
         </div>
         <div className="container pb-5">
-          {currentPosts
-            .filter((worker) => {
-              return search.toLowerCase() === ""
-                ? worker
-                : worker.worker_name
-                    .toLowerCase()
-                    .includes(search.toLowerCase());
-            })
-            .sort((a, b) => {
-              return sort === "asc"
-                ? a.worker_name.localeCompare(b.worker_name)
-                : b.worker_name.localeCompare(a.worker_name);
-            })
-            .map((worker, index) => (
-              <div key={index}
-                className="p-3"
-                style={{ backgroundColor: "white", borderRadius: 10 }}
-              >
-                <div className="row">
-                  <div className="col-lg-2 col-md-3">
-                    <div style={{ width: "120px", height: "120px" }}>
-                      <Image
-                        className="w-100 h-100"
-                        src={profile1}
-                        alt="profile"
-                        style={{ height: 120, width: 120 }}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-7 col-md-6">
-                    <p style={{ fontSize: 22, fontWeight: 600 }}>
-                      {worker.worker_name}
-                    </p>
-                    <p
-                      style={{
-                        color: "#9ea0a5",
-                        fontSize: 14,
-                        fontWeight: 400,
-                      }}
-                    >
-                      Web developer
-                    </p>
-                    <div style={{ display: "flex" }}>
-                      <div className="pr-2">
-                        <Image src={map} alt="map" />
+          <div
+            className="p-3"
+            style={{ backgroundColor: "white", borderRadius: 10 }}
+          >
+            {currentPosts
+              .filter((worker) => {
+                return search.toLowerCase() === ""
+                  ? worker
+                  : worker.worker_name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+              })
+              .map((worker, index) => (
+                <div key={index}>
+                  <div className="row align-items-center">
+                    <div className="col-lg-2 col-md-3 d-flex justify-content-center align-items-center">
+                      <div style={{ width: "120px", height: "120px" }}>
+                        {!worker.worker_photo ? (
+                          <Image
+                            src={profile1}
+                            alt="profile"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        ) : (
+                          <Image
+                            src={worker.worker_photo}
+                            alt="profile"
+                            width={100}
+                            height={100}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "100%",
+                            }}
+                          />
+                        )}
                       </div>
+                    </div>
+                    <div className="col-lg-7 col-md-6">
+                      <p style={{ fontSize: 22, fontWeight: 600, margin: 0 }}>
+                        {worker.worker_name}
+                      </p>
                       <p
                         style={{
                           color: "#9ea0a5",
@@ -145,31 +144,63 @@ function SSR({ worker }) {
                           fontWeight: 400,
                         }}
                       >
-                        {worker.worker_city}, {worker.worker_province}
+                        {worker.worker_jobdesk}
                       </p>
+                      <div className="d-flex">
+                        <div className="mr-2">
+                          <Image src={map} alt="map" />
+                        </div>
+                        <p
+                          style={{
+                            color: "#9ea0a5",
+                            fontSize: 14,
+                            fontWeight: 400,
+                          }}
+                        >
+                          {worker.worker_city}, {worker.worker_province}
+                        </p>
+                      </div>
+                      {/* <div className="d-flex">
+                        {skill.map((skill) => (
+                          <div
+                            className="border-0 mr-2"
+                            style={{
+                              width: "auto",
+                              padding: "0 10px",
+                              height: 28,
+                              borderRadius: 4,
+                              border: "1px solid #fbb017",
+                              background: "rgba(251, 176, 23, 0.6)",
+                              textAlign: "center",
+                              color: "white",
+                            }}
+                          >
+                            {skill.skill_name}
+                          </div>
+                        ))}
+                      </div> */}
                     </div>
-                    {/* <Skill /> */}
+                    <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
+                      <Link href={`/profile-view/${worker.worker_id}`}>
+                        <button
+                          style={{
+                            width: 148,
+                            height: 54,
+                            borderRadius: 4,
+                            background: "#5e50a1",
+                            color: "white",
+                            textAlign: "center",
+                          }}
+                        >
+                          Lihat Profile
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="col-lg-3 col-md-3 p-3 pt-md-5 p-lg-5">
-                    <Link href={`/profile/${worker.worker_id}`}>
-                      <button
-                        style={{
-                          width: 148,
-                          height: 54,
-                          borderRadius: 4,
-                          background: "#5e50a1",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        Lihat Profile
-                      </button>
-                    </Link>
-                  </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            ))}
+              ))}
+          </div>
           <Pagination
             totalPosts={worker.length}
             postsPerPage={postsPerPage}
