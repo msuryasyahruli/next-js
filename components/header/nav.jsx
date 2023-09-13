@@ -12,8 +12,8 @@ const Nav = () => {
   const [login, setLogin] = useState();
 
   const isLogout = () => {
-    window.location.reload();
     localStorage.clear();
+    // window.location.reload();
   };
 
   useEffect(() => {

@@ -127,7 +127,9 @@ const Portofolio = () => {
                   src={portfolio.photo}
                   alt="app"
                   crossOrigin="anonymous"
-                  style={{ width: "100%", borderRadius: 5 }}
+                  width={100}
+                  height={100}
+                  style={{ width: "100%",height:"auto", borderRadius: 5 }}
                 />
               </div>
               <div className="col-md-6">

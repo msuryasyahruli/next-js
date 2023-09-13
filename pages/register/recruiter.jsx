@@ -70,7 +70,7 @@ const Recruiter = () => {
             style={{
               display: "flex",
               justifyContent: "space-evenly",
-              height: "100vh",
+              // height: "100vh",
             }}
           >
             <div
@@ -118,10 +118,10 @@ const Recruiter = () => {
             <div
               style={{
                 width: 570,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: 10,
+                // display: "flex",
+                // flexDirection: "column",
+                // justifyContent: "center",
+                padding: "100px 10px",
               }}
             >
               <div>
@@ -130,7 +130,6 @@ const Recruiter = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-
                 <div>
                   <p
                     style={{

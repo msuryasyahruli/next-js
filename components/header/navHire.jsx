@@ -19,7 +19,6 @@ const NavHire = () => {
   }, []);
 
   const isLogout = () => {
-    window.location.reload();
     localStorage.clear();
   };
 

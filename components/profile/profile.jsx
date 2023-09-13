@@ -317,8 +317,10 @@ const Profile = () => {
                               <Image
                                 src={portfolio.photo}
                                 alt="app"
+                                width={100}
+                                height={100}
                                 crossOrigin="anonymous"
-                                style={{ width: "100%", borderRadius: 5 }}
+                                style={{ width: "100%",height:"auto", borderRadius: 5 }}
                               />
                               <p>{portfolio.app_name}</p>
                             </div>
