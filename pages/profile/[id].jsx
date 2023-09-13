@@ -6,7 +6,7 @@ import Navlogin from "../../components/header/navlogin";
 import ProfileRecruiter from "../../components/profile recruit/profileRecruiter";
 import NavHire from "../../components/header/navHire";
 
-const index = () => {
+const Index = () => {
   const [login, setLogin] =
     useState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,4 +52,4 @@ const index = () => {
   }
 };
 
-export default index;
+export default Index;

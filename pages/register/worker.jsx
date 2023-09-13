@@ -21,13 +21,12 @@ const Toast = Swal.mixin({
   },
 });
 
-const worker = () => {
+const Worker = () => {
   const [data, setData] = useState({
     worker_name: "",
     worker_email: "",
     worker_phone: "",
     worker_password: "",
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const change = (e) => {
@@ -38,9 +37,7 @@ const worker = () => {
     // console.log(data);
   };
 
-  const router =
-    useRouter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const router = useRouter();
 
   const submit = (e) => {
     axios
@@ -291,4 +288,4 @@ const worker = () => {
   );
 };
 
-export default worker;
+export default Worker;

@@ -99,11 +99,9 @@ const Hire = () => {
         setData(res.data.data[0]);
         Toast.fire({
           icon: "success",
-          title: "Hire Success",
+          title: "Hired",
         });
         window.location.reload();
-        // setTimeout(function () {
-        // }, 1000);
       })
       .catch((err) => {
         console.log(err);

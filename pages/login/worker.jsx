@@ -21,7 +21,7 @@ const Toast = Swal.mixin({
   },
 });
 
-const worker = () => {
+const Worker = () => {
   const [data, setData] = useState({
     worker_email: "",
     worker_password: "",
@@ -239,4 +239,4 @@ const worker = () => {
   );
 };
 
-export default worker;
+export default Worker;

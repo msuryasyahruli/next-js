@@ -8,6 +8,7 @@ import github from "./imgProfile/github.png";
 import gitlab from "./imgProfile/gitlab.png";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const ProfileViewer = () => {
   const router = useRouter();
@@ -169,7 +170,7 @@ const ProfileViewer = () => {
                     >
                       {worker.worker_description}
                     </p>
-                    <a href={`hire/${worker.worker_id}`}>
+                    <Link href={`hire/${worker.worker_id}`}>
                       <button
                         style={{
                           height: 50,
@@ -182,7 +183,7 @@ const ProfileViewer = () => {
                       >
                         Hire
                       </button>
-                    </a>
+                    </Link>
                     <p
                       style={{ fontSize: 22, fontWeight: 600, paddingTop: 20 }}
                     >

@@ -21,7 +21,7 @@ const Toast = Swal.mixin({
   },
 });
 
-const recruiter = () => {
+const Recruiter = () => {
   const [data, setData] = useState({
     recruiter_name: "",
     recruiter_email: "",
@@ -29,7 +29,6 @@ const recruiter = () => {
     recruiter_password: "",
     company_name: "",
     recruiter_position: "",
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const change = (e) => {
@@ -42,7 +41,6 @@ const recruiter = () => {
 
   const router =
     useRouter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const submit = (e) => {
     axios
@@ -322,4 +320,4 @@ const recruiter = () => {
   );
 };
 
-export default recruiter;
+export default Recruiter;

@@ -19,11 +19,8 @@ const NavHire = () => {
   }, []);
 
   const isLogout = () => {
-    localStorage.clear();
     window.location.reload();
-    setTimeout(function () {
-      window.location.reload();
-    }, 1000);
+    localStorage.clear();
   };
 
   return (
@@ -53,7 +50,7 @@ const NavHire = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href=""
+                    href="#"
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-toggle="dropdown"

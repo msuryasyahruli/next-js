@@ -5,7 +5,7 @@ import Footer from "../../../components/footer/footer";
 import EditProfileRecruiter from "../../../components/profile recruit/editProfileRecruiter";
 import NavHire from "../../../components/header/navHire";
 
-const edit = () => {
+const Edit = () => {
   const [role, setRole] =
     useState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,4 +34,4 @@ const edit = () => {
   }
 };
 
-export default edit;
+export default Edit;

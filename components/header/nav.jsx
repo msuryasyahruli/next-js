@@ -12,10 +12,8 @@ const Nav = () => {
   const [login, setLogin] = useState();
 
   const isLogout = () => {
+    window.location.reload();
     localStorage.clear();
-    setTimeout(function () {
-      window.location.reload();
-    }, 1000);
   };
 
   useEffect(() => {
@@ -65,7 +63,7 @@ const Nav = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href=""
+                    href="#"
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-toggle="dropdown"
