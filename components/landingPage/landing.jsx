@@ -403,6 +403,7 @@ const Landing = () => {
               backgroundColor: "#5e50a1",
               borderRadius: "40px 8px 40px 8px",
               padding: "40px 60px",
+              margin:1
             }}
           >
             <div
