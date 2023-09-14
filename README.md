@@ -90,44 +90,52 @@ NEXT_PUBLIC_API = [BACKEND_URL]
 
 <table>
  <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/register-worker.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/register-recruiter.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
    <tr>
-    <td>Register as </td>
-    <td>Register as </td>
+    <td>Register as worker</td>
+    <td>Register as recruiter</td>
   </tr>
   <tr>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/login-worker.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/login-recruiter.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Login as worker</td>
+    <td>Login as recruiter</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/landingPage-.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/home-.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Landing Page</td>
+    <td>Home Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/profile-worker.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/profile-recruiter.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Profile as worker</td>
+    <td>Profile as recruiter</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/profile-edit-worker.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="https://github.com/msuryasyahruli/peworld-web/blob/master/scrnsht/profile-edit-recruiter.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Edit profile worker</td>
+    <td>Edit profile recuiter</td>
+  </tr>
+<!--    <tr>
     <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
    <tr>
-    <td>Login as </td>
-    <td>Login as </td>
-  </tr>
-   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-   <tr>
-    <td>Home</td>
     <td></td>
-  </tr>
-   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-   <tr>
-    <td>Profile as </td>
-    <td>Profile as </td>
-  </tr>
-   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-   <tr>
-    <td> </td>
-    <td> </td>
+    <td></td>
   </tr>
    <tr>
     <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
@@ -136,15 +144,7 @@ NEXT_PUBLIC_API = [BACKEND_URL]
    <tr>
     <td></td>
     <td></td>
-  </tr>
-   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td><img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-   <tr>
-    <td></td>
-    <td></td>
-  </tr>
+  </tr> -->
 </table>
 <!-- CONTRIBUTING -->
 
