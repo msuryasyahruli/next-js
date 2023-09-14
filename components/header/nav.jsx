@@ -3,17 +3,21 @@ import React, { useEffect, useState } from "react";
 import logo from "./imgNav/logo.png";
 import bell from "./imgNav/bell.png";
 import mail from "./imgNav/mail.png";
-// import Profile from "./imgNav/profile.png";
 import Profile2 from "./imgNav/profile (2).png";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Nav = () => {
   const [login, setLogin] = useState();
+  const router = useRouter();
 
   const isLogout = () => {
+    // setTimeout(function () {
+    //   window.location.reload();
+    // }, 1);
+    router.push("/login/worker");
     localStorage.clear();
-    // window.location.reload();
   };
 
   useEffect(() => {
@@ -107,13 +111,13 @@ const Nav = () => {
                     >
                       Edit profile
                     </Link>
-                    <Link
+                    <button
                       className="dropdown-item"
-                      href="/landingPage"
+                      // href="/landingPage"
                       onClick={isLogout}
                     >
                       Log Out
-                    </Link>
+                    </button>
                   </div>
                 </li>
               </ul>

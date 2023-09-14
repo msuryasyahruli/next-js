@@ -79,7 +79,7 @@ const ProfileViewer = () => {
 
   const [login, setLogin] = useState();
   useEffect(() => {
-    const isLogin = localStorage.getItem("user_id");
+    const isLogin = localStorage.getItem("role");
     setLogin(isLogin);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -170,20 +170,24 @@ const ProfileViewer = () => {
                     >
                       {worker.worker_description}
                     </p>
-                    <Link href={`hire/${worker.worker_id}`}>
-                      <button
-                        style={{
-                          height: 50,
-                          width: "100%",
-                          borderRadius: 4,
-                          border: 0,
-                          color: "white",
-                          background: "#5e50a1",
-                        }}
-                      >
-                        Hire
-                      </button>
-                    </Link>
+                    {login === "recruiter" ? (
+                      <Link href={`hire/${worker.worker_id}`}>
+                        <button
+                          style={{
+                            height: 50,
+                            width: "100%",
+                            borderRadius: 4,
+                            border: 0,
+                            color: "white",
+                            background: "#5e50a1",
+                          }}
+                        >
+                          Hire
+                        </button>
+                      </Link>
+                    ) : (
+                      ""
+                    )}
                     <p
                       style={{ fontSize: 22, fontWeight: 600, paddingTop: 20 }}
                     >
@@ -322,7 +326,11 @@ const ProfileViewer = () => {
                                 width={100}
                                 height={100}
                                 crossOrigin="anonymous"
-                                style={{ width: "100%",height: "auto", borderRadius: 5 }}
+                                style={{
+                                  width: "100%",
+                                  height: "auto",
+                                  borderRadius: 5,
+                                }}
                               />
                               <p>{portfolio.app_name}</p>
                             </div>

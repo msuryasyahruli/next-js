@@ -37,7 +37,7 @@ const Index = () => {
     return (
       <>
         <Nav />
-        <Profile />
+        <ProfileViewer />
         <Footer />
       </>
     );

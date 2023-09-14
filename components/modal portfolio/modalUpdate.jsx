@@ -1,8 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-// import { updateExpAction } from "../../config/redux/actions/expAction";
-// import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 function ModalUpdate({ portfolio_id, app_name, link_repo, tipe, children }) {
   // const dispatch = useDispatch();
@@ -20,7 +31,6 @@ function ModalUpdate({ portfolio_id, app_name, link_repo, tipe, children }) {
       ...data,
       [e.target.name]: e.target.value,
     });
-    // console.log(data);
   };
 
   const handleSubmit = (e) => {
@@ -29,9 +39,11 @@ function ModalUpdate({ portfolio_id, app_name, link_repo, tipe, children }) {
       .put(`${process.env.NEXT_PUBLIC_API}/portfolio/${portfolio_id}`, data)
       .then((res) => {
         setData(res.data.data[0]);
-        // console.log(res.data.data[0]);
-        alert("experience updated");
-        setShow(false);
+        Toast.fire({
+          icon: "success",
+          title: "Portfolio Updated",
+        });
+        // setShow(false);
         window.location.reload();
       })
       .catch((err) => {

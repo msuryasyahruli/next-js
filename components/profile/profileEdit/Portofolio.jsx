@@ -30,7 +30,6 @@ const Portofolio = () => {
         .get(`${process.env.NEXT_PUBLIC_API}/portfolio/${islogin}`)
         .then((res) => {
           setPortfolio(res.data.data);
-          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -94,10 +93,9 @@ const Portofolio = () => {
         },
       })
       .then((res) => {
-        // console.log(res);
         Toast.fire({
           icon: "success",
-          title: "Portfolio created",
+          title: res.data.message,
         });
         setTimeout(function () {
           window.location.reload();
@@ -105,7 +103,7 @@ const Portofolio = () => {
       })
       .catch((err) => {
         console.log(err);
-        alert(err);
+        alert(err.message);
       });
   };
 

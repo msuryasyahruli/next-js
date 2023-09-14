@@ -1,10 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-// import { useDispatch } from "react-redux";
-// import { deleteExpAction } from "../../config/redux/actions/expAction";
+import Swal from "sweetalert2";
 
 function ModalDelete({portfolio_id,children}) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   // const dispatch = useDispatch()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -19,8 +30,10 @@ function ModalDelete({portfolio_id,children}) {
         },
       })
       .then((res) => {
-        console.log(res);
-        alert("experience deleted");
+        Toast.fire({
+          icon: "success",
+          title: res.data.message,
+        });
         setShow(false);
         window.location.reload();
       })

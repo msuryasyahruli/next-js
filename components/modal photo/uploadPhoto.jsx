@@ -1,6 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import Swal from "sweetalert2";
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
 const UploadPhoto = (worker_id, photo) => {
   const [show, setShow] = useState(false);
@@ -11,7 +24,6 @@ const UploadPhoto = (worker_id, photo) => {
   const handleUpload = (e) => {
     setImage(e.target.files[0]);
   };
-  // console.log(worker_id.worker_id);  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +37,10 @@ const UploadPhoto = (worker_id, photo) => {
         },
       })
       .then((res) => {
-        alert("photo updated");
+        Toast.fire({
+          icon: "success",
+          title: "photo updated",
+        });
         setShow(false);
         window.location.reload();
       })
